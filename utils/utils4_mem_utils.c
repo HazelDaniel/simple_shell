@@ -1,5 +1,14 @@
 #include "main.h"
 
+/**
+ * _realloc_ptr - a function that rellocates a
+ * double pointer
+ * @ptr: the ptr
+ * @old_size: old length
+ * @size: the new length
+ * Return: void
+ * description: checked
+ **/
 void **_realloc_ptr(void *ptr, size_t old_size, size_t size)
 {
 	char **res_tmp = NULL, **ptr_cp;
@@ -96,6 +105,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
  * an array of pointers to characters
  * @str_arr: the array in question
  * Return: void
+ * description: checked
  **/
 void free_str_arr(char **str_arr, int is_dyn)
 {

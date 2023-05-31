@@ -9,22 +9,24 @@
  * @ind_ptr: the pointer to the index
  * @i_ptr: the pointer to the counter
  * Return: void
+ * description: checked
  **/
 static void determine_jump(char **buff_ptr, char *delim, int *ind_ptr, int *i_ptr)
 {
-	int noc, lb, acn;
-		noc = first_oc_of(*buff_ptr + *i_ptr, *delim);
-		if (noc < 0)
-			lb = 0;
-		acn = adj_char_num(*buff_ptr + *i_ptr + noc, (*buff_ptr)[*i_ptr + noc], 0);
-		if (noc >= 0 && acn != 2)
-			lb = 1, *i_ptr += (noc + acn), *ind_ptr += (noc + acn);
-		if (lb)
-		{
-			for (*i_ptr = *ind_ptr; (*buff_ptr)[*i_ptr] &&
-			!in_str((*buff_ptr)[*i_ptr], delim); (*i_ptr)++)
-				(*ind_ptr)++;
-		}
+	int noc = -1, lb = 0, acn = 0;
+
+	noc = first_oc_of(*buff_ptr + *i_ptr, *delim);
+	if (noc < 0)
+		lb = 0;
+	acn = adj_char_num(*buff_ptr + *i_ptr + noc, (*buff_ptr)[*i_ptr + noc], 0);
+	if (noc >= 0 && acn != 2)
+		lb = 1, *i_ptr += (noc + acn), *ind_ptr += (noc + acn);
+	if (lb)
+	{
+		for (*i_ptr = *ind_ptr; (*buff_ptr)[*i_ptr] &&
+		!in_str((*buff_ptr)[*i_ptr], delim); (*i_ptr)++)
+			(*ind_ptr)++;
+	}
 
 }
 /**
@@ -133,6 +135,7 @@ char* com_tok(char* str, char* delim)
   * _trim - a function that trims
   * @str: the string to trim
   * Return: the trimmed string
+	* description: checked
  */
 char *_trim(char *str)
 {
@@ -176,6 +179,7 @@ char *_trim(char *str)
  * that checks if a character is printable
  * @c: the character parameter
  * Return: int
+ * description: checked
  **/
 int is_print(char c)
 {
@@ -189,6 +193,7 @@ int is_print(char c)
   * @c: parameter of type char .
   * @str: parameter of type char *.
   * Return: int .
+	* description: checked
  */
 int in_str(char c, char *str)
 {
@@ -212,6 +217,7 @@ int in_str(char c, char *str)
  * @dest: destination string
  * @src: source string
  * Return: char *
+ * description: checked
  **/
 char *_strcpy(char (*dest)[BUFF_LEN], char **src)
 {

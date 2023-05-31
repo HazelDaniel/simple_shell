@@ -6,22 +6,23 @@
  * @str: the input string
  * @delim: the delimiter
  * Return: char **
+ * description: checked
  **/
 char **_splitstr(char *str, char *delim)
 {
-	char **res_str = NULL, *token, cp_buff[1024] = "", *res_buff[1024] = {NULL},
+	char **res_str = NULL, *token, *res_buff[1024] = {NULL},
 	*trimmed = _trim(str);
 	size_t count = 0, res_index = 0, i = 0;
 
 	if (!trimmed)
 		return (NULL);
-	token = _strtok(__cp__(cp_buff, trimmed), delim);
+	token = _strtok(trimmed, delim);
 	while (token)
 	{
 		count = 0;
 		while (token[count])
 			count++;
-		res_buff[res_index] = malloc((count + 1) * sizeof(char));
+		res_buff[res_index] = malloc((count * sizeof(char)) + 1);
 		if (!res_buff[res_index])
 		{
 			for (i = 0; i < res_index; i++)
@@ -34,7 +35,7 @@ char **_splitstr(char *str, char *delim)
 		token = _strtok(NULL, delim);
 		res_index++;
 	}
-	res_str = malloc((res_index + 1) * sizeof(char));
+	res_str = malloc((res_index) * sizeof(char *) + sizeof(char *));
 	if (res_str == NULL)
 	{
 		free_str_arr(res_buff, 0), free(trimmed);
@@ -53,6 +54,7 @@ char **_splitstr(char *str, char *delim)
  * allocated array of characters
  * @src: the source string
  * Return: the duplicated string
+ * description: checked
  **/
 char *_strddup(char *src)
 {
@@ -79,6 +81,7 @@ char *_strddup(char *src)
  * @str: the string
  * @c: the character
  * Return: int
+ * description: checked
  **/
 int first_oc_of(char *str, char c)
 {
@@ -100,6 +103,7 @@ int first_oc_of(char *str, char c)
  * @f: the property - as a function
  * @str: the string
  * Return: int
+ * description: checked
  **/
 int first_oc(int (*f)(char c), char *str)
 {
@@ -118,6 +122,7 @@ int first_oc(int (*f)(char c), char *str)
  * derived objects
  * @p: array of derived objects
  * Return: int
+ * description: checked
  **/
 int _len_p(void **p)
 {

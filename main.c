@@ -15,13 +15,8 @@ int main (int argc, char **argv, char **envp)
 {
 	(void)envp;
 	char *token, *str = "&&&i &what is && the matter &&& if ?& hello world && how", *delim = "&";
-
-	token = com_tok(str, delim);
-	while (token && token[0])
-	{
-		printf("token is :%s:\n", token);
-		token = com_tok(NULL, delim);
-	}
+	char **s_arr, *hey_man = "hey man";
+	int i;
 
 	return (0);
 }

@@ -3,7 +3,6 @@
 /**
  * error_env - Creates an error message for env errors.
  * @args: An array of arguments passed to the command.
- *
  * Return: The error string.
  */
 char *error_env(char **args)
@@ -25,11 +24,11 @@ char *error_env(char **args)
 	}
 
 	_memcpy(name, error, _strlen(name));
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": Unable to add/remove from environment\n");
+	_strncat(error, ": ", 2);
+	_strncat(error, hist_str, _strlen(hist_str));
+	_strncat(error, ": ", 2);
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, ": Unable to add/remove from environment\n", 40);
 
 	free(hist_str);
 	return (error);
@@ -52,8 +51,8 @@ char *error_1(char **args)
 		return (NULL);
 
 	_memcpy("alias: ", error, _strlen("alias: "));
-	_strcat(error, args[0]);
-	_strcat(error, " not found\n");
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, " not found\n", 12);
 
 	return (error);
 }
@@ -82,11 +81,11 @@ char *error_2_exit(char **args)
 	}
 
 	_memcpy(name, error, _strlen(name));
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": exit: Illegal number: ");
-	_strcat(error, args[0]);
-	_strcat(error, "\n");
+	_strncat(error, ": ", 2);
+	_strncat(error, hist_str, _strlen(hist_str));
+	_strncat(error, ": exit: Illegal number: ", 25);
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, "\n", 1);
 
 	free(hist_str);
 	return (error);
@@ -122,14 +121,14 @@ char *error_2_cd(char **args)
 	}
 
 	_memcpy(name, error, _strlen(name));
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
+	_strncat(error, ": ", 2);
+	_strncat(error, hist_str, _strlen(hist_str));
 	if (args[0][0] == '-')
-		_strcat(error, ": cd: Illegal option ");
+		_strncat(error, ": cd: Illegal option ", 22);
 	else
-		_strcat(error, ": cd: can't cd to ");
-	_strcat(error, args[0]);
-	_strcat(error, "\n");
+		_strncat(error, ": cd: can't cd to ", 19);
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, "\n", 1);
 
 	free(hist_str);
 	return (error);
@@ -159,13 +158,13 @@ char *error_2_syntax(char **args)
 	}
 
 	_memcpy(name, error, _strlen(name));
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": Syntax error: \"");
-	_strcat(error, args[0]);
-	_strcat(error, "\" unexpected\n");
+	_strncat(error, ": ", 2);
+	_strncat(error, hist_str, _strlen(hist_str));
+	_strncat(error, ": Syntax error: \"", 18);
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, "\" unexpected\n", 14);
 
 	free(hist_str);
-	return (error);
 
+	return (error);
 }

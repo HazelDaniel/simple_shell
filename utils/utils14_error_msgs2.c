@@ -25,11 +25,11 @@ char *error_126(char **args)
 	}
 
 	_memcpy(name, error, _strlen(name));
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": Permission denied\n");
+	_strncat(error, ": ", 2);
+	_strncat(error, hist_str, _strlen(hist_str));
+	_strncat(error, ": ", 2);
+	_strncat(error, args[0], _strlen(args[0]));
+	_strncat(error, ": Permission denied\n", 21);
 
 	free(hist_str);
 	return (error);

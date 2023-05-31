@@ -2,14 +2,13 @@
 
 /**
   * _strcmp - a function that compares two strings
-  * @str1_ptr: parameter of type char **
-  * @str2_ptr: parameter of type char **
+  * @str1: parameter of type char *
+  * @str2: parameter of type char *
   * Return: an integer value
 	* description: 0 if str1 == str2
 	*              len(str1) - len(str2) if str1 != str2
-	* warning: don't pass in the address of a null pointer
-	*  you'll get the same behavior as the standard strcmp
-	*  function
+	*
+	*    					 checked
  */
 int _strcmp(char *str1, char *str2)
 {
@@ -52,6 +51,7 @@ int _strcmp(char *str1, char *str2)
  * the lenght of a string
  * @str: the string
  * Return: unsigned int
+ * description: checked
  **/
 unsigned int _strlen(char *str)
 {
@@ -66,36 +66,36 @@ unsigned int _strlen(char *str)
 }
 
 /**
-* _strcat - A function that concatenates two strings
+* _strncat - A function that concatenates two strings
+* up to a specified length
 * @dest: a destination string
 * @src: a string to append
+* @n: the specified length
 * Return: Always a string
+* description: checked
 **/
-char *_strcat(char *dest, char *src)
+char *_strncat(char *dest, char *src, int n)
 {
-	int dest_count = 0;
-	int src_count = 0;
+	int dest_count = 0, src_count = 0, ind = 0, i;
+	unsigned int res_len = 0;
+	char *res = NULL;
 
-	if (!dest)
+	res_len = _strlen(src) + _strlen(dest);
+
+	res = malloc((res_len) * sizeof(char) + 1);
+	if (!res)
+		return (res);
+	if (res_len == 0)
 		return (NULL);
-	if (!src)
-		return (dest);
+	res[res_len] = '\0';
 
-	while (dest[dest_count] != '\0')
-	{
-		dest_count++;
-	}
+	for (ind = 0; dest[ind]; ind++)
+		res[ind] = dest[ind];
+	for (i = 0; i < n && src[i]; ind++, i++)
+		res[ind] = src[i];
 
-	while (src[src_count] != '\0')
-	{
-		dest[dest_count] = src[src_count];
-		src_count++;
-		dest_count++;
-	}
-	dest[dest_count] = '\0';
-	return (dest);
+	return (res);
 }
-
 /**
 * _strdcat - A function that concatenates two strings
 * dynamically
@@ -103,28 +103,77 @@ char *_strcat(char *dest, char *src)
 * @src: a string to append
 * description: the first string and only that needs to be
 *     dynamically allocated
+*     checked
 * Return: Always a string
 **/
 char *_strdcat(char *dest, char *src)
 {
-	int dest_count = 0, src_count = 0, ind = 0;
-	unsigned int res_len = 0, len_dest = _strlen(dest);
+	int dest_count = 0, src_count = 0, ind = 0, i;
+	unsigned int res_len = 0;
 	char *res = NULL;
 
-	res_len = _strlen(src) + len_dest;
+	res_len = _strlen(src) + _strlen(dest);
 
-	res = malloc((res_len + 1) * sizeof(char));
-	if (res == NULL)
+	res = malloc((res_len) * sizeof(char) + 1);
+	if (!res)
 		return (res);
 	if (res_len == 0)
 		return (NULL);
 	res[res_len] = '\0';
 
-	for (ind = 0; ind < len_dest; ind++)
+	for (ind = 0; dest[ind]; ind++)
 		res[ind] = dest[ind];
-	for (; ind < res_len; ind++)
-		res[ind] = src[ind];
-	free(dest);
+	for (i = 0; ind < res_len; ind++)
+		res[ind] = src[i++];
 
 	return (res);
+}
+
+/**
+ * _log_split - a function that logically splits a string
+ * into an array of strings based on a delimiter
+ * @str: the input string
+ * @delim: the delimiter
+ * Return: char **
+ * description: checked
+ **/
+char **_log_split(char *str, char *delim)
+{
+	char **res_str = NULL, *token, *res_buff[1024] = {NULL},
+	*trimmed = _trim(str);
+	size_t count = 0, res_index = 0, i = 0;
+
+	if (!trimmed)
+		return (NULL);
+	token = com_tok(trimmed, delim);
+	while (token)
+	{
+		count = 0;
+		while (token[count])
+			count++;
+		res_buff[res_index] = malloc((count * sizeof(char)) + 1);
+		if (!res_buff[res_index])
+		{
+			for (i = 0; i < res_index; i++)
+				free(res_buff[i]), free(trimmed);
+			return (NULL);
+		}
+		res_buff[res_index][count] = '\0';
+		for (i = 0; token[i]; i++)
+			res_buff[res_index][i] = token[i];
+		token = com_tok(NULL, delim);
+		res_index++;
+	}
+	res_str = malloc((res_index) * sizeof(char *) + sizeof(char *));
+	if (res_str == NULL)
+	{
+		free_str_arr(res_buff, 0), free(trimmed);
+		return (NULL);
+	}
+	res_str[res_index] = NULL;
+	for (i = 0; i < res_index; i++)
+		res_str[i] = res_buff[i];
+	free(trimmed);
+
+	return (res_str);
 }

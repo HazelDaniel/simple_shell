@@ -14,7 +14,7 @@ void split_by_or(comm_list_t *c_list,
 	int j;
 	char *cmd_trim = _trim(curr_token);
 
-	raw_token = _splitstr(cmd_trim, "|");
+	raw_token = _log_split(cmd_trim, "|");
 	for (j = 0; raw_token[j]; j++)
 		append_comm(c_list, '|', raw_token[j], 0);
 
@@ -36,7 +36,7 @@ void split_by_and(comm_list_t *c_list,
 	int j;
 	char *cmd_trim = _trim(curr_token);
 
-	raw_token = _splitstr(cmd_trim, "&");
+	raw_token = _log_split(cmd_trim, "&");
 	for (j = 0; raw_token[j]; j++)
 		append_comm(c_list, '&', raw_token[j], 0);
 
@@ -59,7 +59,7 @@ void split_by_and_or_order(comm_list_t *c_list,
 	int j;
 	char *cmd_trim = _trim(curr_token), **raw_sub_token = NULL;
 
-	raw_token = _splitstr(cmd_trim, "|");
+	raw_token = _log_split(cmd_trim, "|");
 	/* split by and */
 	for (j = 0; raw_token[j]; j++)
 	{
@@ -93,7 +93,7 @@ void split_by_or_and_order(comm_list_t *c_list,
 	int j;
 	char *cmd_trim = _trim(curr_token), **raw_sub_token = NULL;
 
-	raw_token = _splitstr(cmd_trim, "|");
+	raw_token = _log_split(cmd_trim, "|");
 	/* split by or exclusively */
 	for (j = 0; raw_token[j]; j++)
 	{

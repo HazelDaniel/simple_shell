@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 /**
  * empty_state_buff - a function that
  * empties out and frees the internal
@@ -12,6 +11,8 @@ void empty_state_buff(char *delim)
 {
 	while (_strtok(NULL, delim))
 		;
+	while (com_tok(NULL, delim))
+		;
 }
 
 /**
@@ -21,9 +22,9 @@ void empty_state_buff(char *delim)
  **/
 void cleanup(void)
 {
-	// _freenv();
-	// free_path();
-	// free_aliases(aliases);
-	// free_vars(variables);
-	// free_commands();
+	_freenv();
+	free_path();
+	free_aliases(aliases);
+	free_vars(variables);
+	free_commands();
 }

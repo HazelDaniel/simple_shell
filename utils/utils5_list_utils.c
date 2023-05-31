@@ -17,8 +17,7 @@ void append_comm(comm_list_t *list, char separator,
 
 	if (!new_comm)
 		return;
-	new_comm->separator = _strddup((char *)&separator);
-	new_comm->separator[1] = '\0';
+	new_comm->separator = malloc(2 * sizeof(char)), _memcpy(&separator, new_comm->separator, 1);
 	new_comm->command = _strddup((char *)command);
 	new_comm->status = (int *)malloc(sizeof(int));
 	new_comm->id = id++;
@@ -95,12 +94,19 @@ void append_comm_list(comm_list_t list)
 	static int index;
 
 	if (!commands)
-		commands = (comm_list_t *)malloc(sizeof(comm_list_t *)), index = 0;
+	{
+		commands = (comm_list_t *)malloc(sizeof(comm_list_t) * 2), index = 0;
+	}
+	else
+	{
+		p_len = (_len_p((void *)commands) + 1) * sizeof(comm_list_t);
+		commands = _realloc(commands, p_len, p_len + sizeof(comm_list_t));
+	}
+
 	if (!commands)
 		return;
 	commands[index++] = list;
-	p_len = _al_len_(commands) * sizeof(comm_list_t);
-	commands = _realloc(commands, p_len, p_len + sizeof(comm_list_t));
+	// p_len = _al_len_(commands);
 	if (!commands)
 		commands = tmp;
 	else
@@ -160,9 +166,9 @@ void print_comms_full(void)
 	* @list: a parameter of type comm_list_t
   * Return: void .
  */
-void clear_comms(comm_list_t list)
+void clear_comms(comm_list_t *list)
 {
-	comm_list_t current = list, next = NULL;
+	comm_list_t current = *list, next = NULL;
 
 	if (!current)
 		return;
@@ -179,7 +185,7 @@ void clear_comms(comm_list_t list)
 		}
 		next = current->next;
 		if (current->is_linked)
-			clear_comms(current->list);
+			clear_comms(&(current->list));
 		free(current->status);
 		free(current->command);
 		free(current->separator);
@@ -202,7 +208,7 @@ void free_commands(void)
 
 	for (i = 0; commands[i]; i++)
 	{
-		clear_comms(commands[i]);
+		clear_comms(&(commands[i]));
 	}
 	free(commands);
 	commands = NULL;
@@ -211,13 +217,13 @@ void free_commands(void)
 /**
   * remove_command - a function that removes
 	* a command from a command flow
-	* @list: parameter of type comm_t *
+	* @list: parameter of type comm_t **
 	* @value: the id of the command
   * Return: void .
  */
-void remove_command(comm_t *list, int value)
+void remove_command(comm_t **list, int value)
 {
-	comm_t *current = list, *prev = NULL;
+	comm_t *current = *list, *prev = NULL;
 
 	if (!current)
 		return;
@@ -229,7 +235,7 @@ void remove_command(comm_t *list, int value)
 	if (current)
 	{
 		if (!prev)
-			list = current->next;
+			*list = current->next;
 		else
 			prev->next = current->next;
 		free(current->command);

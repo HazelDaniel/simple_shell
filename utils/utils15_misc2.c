@@ -62,7 +62,7 @@ char *_itoa(int num)
 	buffer[len] = '\0';
 
 	if (num < 0)
-		num1 = num * -1, buffer[0] = '-';
+		num1 = -num, buffer[0] = '-';
 	else
 		num1 = num;
 
@@ -71,7 +71,7 @@ char *_itoa(int num)
 		buffer[len] = (num1 % 10) + '0';
 		num1 /= 10;
 		len--;
-	} while (num1 > 0);
+	} while (num1 > 0 && len != -1);
 
 	return (buffer);
 }

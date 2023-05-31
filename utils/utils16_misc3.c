@@ -67,9 +67,10 @@ void trim_str_arr(char **args)
 		return;
 	for (i = 0; args[i]; i++)
 	{
-		last_nl = last_oc_of(args[i], '\n');
+		// printf("command is :%s:\n", args[i]);
 		tmp = _trim(args[i]);
-		if (last_nl + 1 == _strlen(args[i]))
+		last_nl = last_oc_of(tmp, '\n');
+		if (last_nl >= 0)
 			tmp[last_nl] = '\0';
 		free(args[i]);
 		args[i] = tmp;
@@ -100,9 +101,10 @@ void format_args(char **args)
 	}
 	for (i = 0; args[i]; i++)
 	{
+		// printf("argument is :%s:\n", args[i]);
 		if (in_str('$', args[i]))
 		{
-			// tmp = var_replace(args[i]);
+			tmp = var_replace(args[i]);
 			if (tmp)
 				free(args[i]), args[i] = tmp;
 		}

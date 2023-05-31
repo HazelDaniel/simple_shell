@@ -73,3 +73,14 @@ int is_log(char c)
 		return (1);
 	return (0);
 }
+
+/**
+* is_n_var - a function that checks if
+* a character can't be included in a variable
+* @c: parameter of type char .
+* Return: int .
+*/
+int is_n_var(char c)
+{
+	return ((!is_word(c) && c != '$'));
+}

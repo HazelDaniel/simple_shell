@@ -19,6 +19,7 @@
 #define BUFF_LEN 1024
 #define true (1)
 #define false (0)
+#define MVL 128
 
 /* STRUCTURES AND DECLARATIONS */
 typedef struct command
@@ -125,9 +126,9 @@ void append_comm(comm_list_t* list, char separator,
 comm_t *prepend_comm(comm_list_t* list, char separator,
 	const char* command, int status);
 void print_comms(const comm_list_t list);
-void clear_comms(comm_list_t list);
+void clear_comms(comm_list_t *list);
 void print_comms_full();
-void remove_command(comm_t *list, int value);
+void remove_command(comm_t **list, int value);
 trashenv_t *get_trash(trashenv_t *list, char *value);
 void append_trash(char *value, int index);
 void remove_trash(char *value);
@@ -185,11 +186,11 @@ void print_aliases();
 /* SHELL VARIABLES */
 void _getall_vars();
 char *_getvar(char *input);
-char *_setvar(char *input);
+int _setvar(char *input);
 void free_vars(var_t *list);
 char *lookup_var(char *input);
 char *expand(char *input);
-char* var_replace(const char* string);
+char* var_replace(char* string);
 
 /* MISC */
 int find_max(int num1, int num2);
@@ -212,6 +213,7 @@ int is_dot(char c);
 int is_tilde(char c);
 int is_hyp(char c);
 int is_log(char c);
+int is_n_var(char c);
 
 /* BUILTINS  AND HANDLERS */
 int (*get_builtin(char *command))(char **list);
@@ -256,6 +258,5 @@ void help_setenv(void);
 void help_unsetenv(void);
 void help_history(void);
 
-#define MVL 128
 
 #endif/*___MAIN_*/

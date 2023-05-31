@@ -58,7 +58,8 @@ int main(int argc, char *argv[], char *envp[])
 	{
 		prompt = var_replace(prompts[1]);
 		buff = malloc(BUFF_LEN * sizeof(char));
-		printf("%s", prompt);
+		if (isatty(STDIN_FILENO))
+			printf("%s", prompt);
 		signal(SIGINT, handle_signal);
 		read = _getline(&buff, &size, STDIN_FILENO);
 		if (read == EOF)

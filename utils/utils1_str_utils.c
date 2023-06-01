@@ -172,6 +172,7 @@ char *_trim(char *str)
 		res[i++] = str[stat];
 	res[pos_end - pos_start + 1] = '\0';
 
+
 	return (res);
 }
 

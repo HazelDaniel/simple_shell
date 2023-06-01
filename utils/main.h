@@ -187,7 +187,7 @@ void print_aliases();
 void _getall_vars();
 char *_getvar(char *input);
 int _setvar(char *input);
-void free_vars(var_t *list);
+void free_vars();
 char *lookup_var(char *input);
 char *expand(char *input);
 char* var_replace(char* string);

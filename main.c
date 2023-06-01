@@ -41,44 +41,18 @@ void handle_signal(int sig)
  **/
 int main(int argc, char *argv[], char *envp[])
 {
-	char *buff = NULL, **cmd, *path_str;
-	int status;
-	size_t read = 0, size = 0, ret_count;
-	pid_t pid = getpid();
+	char *str, *token, *buff;
+	int i;
 
-	_copyenv(), create_pid(pid);
-	_setenv("?", "0");
-	set_exec_dir(argv), atexit(exec_on_exit);
-	path_str = _getenv("PATH");
-	linkpath(path_str);
-	name = argv[0], (void)envp;
-	hist = 1;
+	i = _setvar("?=2");
+	puts("working");
+	i = _setvar("?=0");
+	str = _getvar("$?");
 
-	while (1)
-	{
-		prompt = var_replace(prompts[1]);
-		buff = malloc(BUFF_LEN * sizeof(char));
-		if (isatty(STDIN_FILENO))
-			printf("%s", prompt);
-		signal(SIGINT, handle_signal);
-		read = _getline(&buff, &size, STDIN_FILENO);
-		if (read == EOF)
-		{
-			free(buff);
-			break;
-		}
-		if (read != EOF)
-		{
-			status = parse_to_commands(buff);
-			if (status == -1)
-				return (status);
-			ret_count += exec_all_commands();
-			free_commands();
-		}
+	printf("the string is :%s:\t and the index was :%d:\n", str, i);
 
-		free(prompt), free(buff);
-		buff = NULL, prompt = NULL;
-	}
+	free(str);
+	cleanup();
 
-	return (ret_count);
+	return (0);
 }

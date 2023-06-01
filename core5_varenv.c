@@ -96,29 +96,26 @@ int _setvar(char *input)
 		variables = new_var;
 		return (1);
 	}
-	cpy = _strddup(input), key = _strtok(cpy, "=");
+	cpy = _strddup(input), key = _strddup(_strtok(cpy, "="));
 	empty_state_buff("="), current = variables;
 
 	if (!current->next)
 	{
-		if (compare_and_sub(&current,
-		&new_var, &input, &cpy, &key))
+		if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
 			return (1);
 		current->next = new_var;
 		return (1);
 	}
 	while (current && current->next)
 	{
-		if (compare_and_sub(&current,
-		&new_var, &input, &cpy, &key))
+		if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
 			return (1);
 		current = current->next;
 	}
-	if (compare_and_sub(&current,
-	&new_var, &input, &cpy, &key))
+	if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
 		return (1);
 	current->next = new_var;
-	free(cpy);
+	free(cpy), free(key);
 
 	return (1);
 }
@@ -139,13 +136,14 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 {
 	if (!_strcmp(((*current_ptr)->value), *input_ptr))
 	{
-		free((*new_ptr)->value), free(*cpy_ptr), free(*new_ptr);
+		free((*new_ptr)->value), free(*cpy_ptr), free(*new_ptr),
+		free(*key_ptr);
 		return (1);
 	}
 	else if (is_start_str(*key_ptr, (*current_ptr)->value))
 	{
 		free((*new_ptr)->value), free((*current_ptr)->value),
-		free(*cpy_ptr);
+		free(*cpy_ptr), free(*key_ptr);
 		(*current_ptr)->value = _strddup(*input_ptr);
 		return (1);
 	}
@@ -159,9 +157,9 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
   * @list: parameter of type char var_t *
   * Return: void
  */
-void free_vars(var_t *list)
+void free_vars()
 {
-	var_t *current = list, *next = NULL;
+	var_t *current = variables, *next = NULL;
 
 	if (!current)
 		return;
@@ -170,8 +168,8 @@ void free_vars(var_t *list)
 		if (current->next == NULL)
 		{
 			free(current->value);
-			free(current);
-			current = NULL;
+			free(variables);
+			variables = NULL;
 			return;
 		}
 		next = current->next;
@@ -179,7 +177,7 @@ void free_vars(var_t *list)
 		free(current);
 		current = next;
 	}
-	list = NULL;
+	variables = NULL;
 }
 
 /**

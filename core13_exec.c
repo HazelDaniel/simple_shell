@@ -11,7 +11,6 @@ int execute(char *comm_str)
 	int (*f)(char **list), ret_num = 0, indic, status;
 	pid_t child_pid;
 
-	// printf("command is :%s\n", comm_str);
 	args = _splitstr(command, "\n\r\a\t ");
 	format_args(args);
 	if (args && args[0])
@@ -97,8 +96,8 @@ int create_ex_stat(int status)
 		return (1);
 	}
 	res[0] = '?', res[1] = '=';
-	_memcpy(tmp, res + 2, _strlen(tmp));
 	res[_strlen(tmp) + 2] = '\0';
+	_memcpy(tmp, res + 2, _strlen(tmp));
 	if (!_setvar(res))
 	{
 		free(tmp), free(res);

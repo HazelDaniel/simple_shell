@@ -26,5 +26,5 @@ void cleanup(void)
 	empty_state_buff("|"); empty_state_buff(";");
 	empty_state_buff(":"); _freenv();
 	free_path(); free_aliases(aliases);
-	free_vars(variables); free_commands();
+	free_vars(); free_commands();
 }

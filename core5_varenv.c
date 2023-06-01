@@ -143,7 +143,7 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 	else if (is_start_str(*key_ptr, (*current_ptr)->value))
 	{
 		free((*new_ptr)->value), free((*current_ptr)->value),
-		free(*cpy_ptr), free(*key_ptr);
+		free(*cpy_ptr), free(*key_ptr), free(*new_ptr);
 		(*current_ptr)->value = _strddup(*input_ptr);
 		return (1);
 	}
@@ -159,25 +159,18 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
  */
 void free_vars()
 {
-	var_t *current = variables, *next = NULL;
+	var_t **current = &variables, *next = NULL;
 
-	if (!current)
+	if (!*current)
 		return;
-	while (current)
+	while (*current)
 	{
-		if (current->next == NULL)
-		{
-			free(current->value);
-			free(variables);
-			variables = NULL;
-			return;
-		}
-		next = current->next;
-		free(current->value);
-		free(current);
-		current = next;
+		next = (*current)->next;
+		free((*current)->value);
+		free(*current);
+		*current = next;
 	}
-	variables = NULL;
+	*current = NULL;
 }
 
 /**

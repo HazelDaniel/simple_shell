@@ -1,6 +1,6 @@
 #include "utils/main.h"
 
-void handle_linked_comms(void);
+int handle_linked_comms(void);
 
 /**
   * exec_comms - a function that executes the
@@ -94,7 +94,7 @@ int exec_all_commands(void)
 	{
 		return (-1);
 	}
-	handle_linked_comms();
+	ret_count += handle_linked_comms();
 	for (; commands[i]; i++)
 	{
 		current = commands[i];
@@ -109,17 +109,18 @@ int exec_all_commands(void)
 * more nested flows within
 * Return: void
 */
-void handle_linked_comms(void)
+int handle_linked_comms(void)
 {
 	int i = 0, j = 0, ret_count = 0;
 	comm_list_t current = NULL;
 
 	if (!commands)
-		return;
+		return (ret_count);
 
 	for (; commands[i]; i++)
 	{
 		current = commands[i];
 		ret_count += eval_comms(current);
 	}
+	return (ret_count);
 }

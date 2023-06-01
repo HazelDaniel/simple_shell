@@ -64,13 +64,11 @@ int exit_(char *status, char **list)
 	}
 	else
 	{
-		cleanup();
 		exit(0);
 	}
 	if (num > max - 1)
 		return (create_error(--list, 2));
 	list -= 1;
-	cleanup();
 	exit(num);
 }
 

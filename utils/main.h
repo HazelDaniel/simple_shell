@@ -214,6 +214,7 @@ int is_tilde(char c);
 int is_hyp(char c);
 int is_log(char c);
 int is_n_var(char c);
+void _memset(void *ptr, int val, size_t len);
 
 /* BUILTINS  AND HANDLERS */
 int (*get_builtin(char *command))(char **list);

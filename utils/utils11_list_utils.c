@@ -17,6 +17,7 @@ pathdir_t *linkpath(char *path)
 		append_path(token);
 		token = _strtok(NULL, ":");
 	}
+	empty_state_buff(":");
 	free(cpath);
 
 	return (head);

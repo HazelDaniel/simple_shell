@@ -25,6 +25,9 @@ void exec_on_exit(void)
 		return;
 	}
 	buff = malloc(BUFF_LEN * sizeof(char));
+	if (!buff)
+		return;
+	_memset(buff, 0, BUFF_LEN);
 	while ((read_n = read(fd, buff, BUFF_LEN)) > 0)
 	{
 		if (count >= _strlen(buff) - 1)
@@ -40,7 +43,7 @@ void exec_on_exit(void)
 	}
 	if (read_n == -1)
 		puts("error with the read");
-	exec_list = _splitstr(buff, "\n");
+	exec_list = _log_split(buff, "\n");
 
 	for (i = 0; exec_list[i]; i++)
 		execute(exec_list[i]);

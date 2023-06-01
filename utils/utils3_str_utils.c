@@ -35,6 +35,7 @@ char **_splitstr(char *str, char *delim)
 		token = _strtok(NULL, delim);
 		res_index++;
 	}
+	empty_state_buff(delim);
 	res_str = malloc((res_index) * sizeof(char *) + sizeof(char *));
 	if (res_str == NULL)
 	{

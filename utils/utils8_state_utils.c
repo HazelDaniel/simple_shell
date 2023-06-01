@@ -22,9 +22,9 @@ void empty_state_buff(char *delim)
  **/
 void cleanup(void)
 {
-	_freenv();
-	free_path();
-	free_aliases(aliases);
-	free_vars(variables);
-	free_commands();
+	empty_state_buff("="); empty_state_buff("&");
+	empty_state_buff("|"); empty_state_buff(";");
+	empty_state_buff(":"); _freenv();
+	free_path(); free_aliases(aliases);
+	free_vars(variables); free_commands();
 }

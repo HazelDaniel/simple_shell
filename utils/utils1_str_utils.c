@@ -11,7 +11,8 @@
  * Return: void
  * description: checked
  **/
-static void determine_jump(char **buff_ptr, char *delim, int *ind_ptr, int *i_ptr)
+static void determine_jump(char **buff_ptr,
+	char *delim, int *ind_ptr, int *i_ptr)
 {
 	int noc = -1, lb = 0, acn = 0;
 
@@ -87,7 +88,7 @@ char *_strtok(char *str, char *delim)
  * Return: one token at a time
  * description: checked
  **/
-char* com_tok(char* str, char* delim)
+char *com_tok(char *str, char *delim)
 {
 	static int _index, _len;
 	int start, i, noc, acn, lb;
@@ -184,49 +185,4 @@ char *_trim(char *str)
 int is_print(char c)
 {
 	return (c >= 33 && c < 127);
-}
-
-/**
-  * in_str - a function that looks up
-	* a character in a string and returns
-	* a boolean integer if found
-  * @c: parameter of type char .
-  * @str: parameter of type char *.
-  * Return: int .
-	* description: checked
- */
-int in_str(char c, char *str)
-{
-	int i = 0;
-
-	if (!str)
-		return (0);
-
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-/**
- * _strcpy - a function that copies the contents
- * of the source string to the destination string
- * @dest: destination string
- * @src: source string
- * Return: char *
- * description: checked
- **/
-char *_strcpy(char (*dest)[BUFF_LEN], char **src)
-{
-	size_t i;
-
-	if (!src || !src[0])
-		return (NULL);
-	for (i = 0; (*src)[i] != '\0'; i++)
-		(*dest)[i] = (*src)[i];
-	(*dest)[i] = '\0';
-	return ((*dest));
 }

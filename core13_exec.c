@@ -11,6 +11,7 @@ int execute(char *comm_str)
 	int (*f)(char **list), ret_num = 0, indic, status;
 	pid_t child_pid;
 
+	// printf("command is :%s\n", comm_str);
 	args = _splitstr(command, "\n\r\a\t ");
 	format_args(args);
 	if (args && args[0])

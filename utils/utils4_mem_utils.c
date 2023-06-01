@@ -104,6 +104,8 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
  * free_str_arr - a function that frees
  * an array of pointers to characters
  * @str_arr: the array in question
+ * @is_dyn: a boolean that holds if
+ * the string array was dynamically allocated
  * Return: void
  * description: checked
  **/

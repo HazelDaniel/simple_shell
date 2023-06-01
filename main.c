@@ -10,7 +10,7 @@ alias_t *aliases = NULL;
 var_t *variables = NULL;
 int hist;
 char *prompts[10] =
-{"_$ ", " ___(($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
+{"_$ ", " ___($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
 
 /**
  * handle_signal - the signal handler for CTRL-C
@@ -79,7 +79,6 @@ int main(int argc, char *argv[], char *envp[])
 		free(prompt), free(buff);
 		buff = NULL, prompt = NULL;
 	}
-	cleanup();
 
 	return (ret_count);
 }

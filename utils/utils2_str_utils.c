@@ -8,7 +8,7 @@
 	* description: 0 if str1 == str2
 	*              len(str1) - len(str2) if str1 != str2
 	*
-	*    					 checked
+	* checked
  */
 int _strcmp(char *str1, char *str2)
 {
@@ -164,6 +164,7 @@ char **_log_split(char *str, char *delim)
 		token = com_tok(NULL, delim);
 		res_index++;
 	}
+	empty_state_buff(delim);
 	res_str = malloc((res_index) * sizeof(char *) + sizeof(char *));
 	if (res_str == NULL)
 	{

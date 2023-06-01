@@ -1,5 +1,10 @@
 #include "utils/main.h"
 
+/**
+ * getall_env - a function that prints
+ * all environment variables
+ * Return: int
+ **/
 int getall_env(void)
 {
 	int i = 0;
@@ -81,11 +86,11 @@ int _setenv(char *input1, char *input2)
 		free(trash_equiv), trash_equiv = NULL;
 		return (0);
 	}
-	new_environ = (char **)_realloc_ptr(new_environ, p_len, p_len + sizeof(char *));
+	new_environ = (char **)_realloc_ptr(new_environ, p_len,
+		p_len + sizeof(char *));
 	if (!new_environ)
 		return (-1);
-	else
-		new_environ[i] = new_val, new_environ[i + 1] = NULL;
+	new_environ[i] = new_val, new_environ[i + 1] = NULL;
 	return (0);
 }
 
@@ -132,15 +137,4 @@ int _unsetenv(char *value)
 		return (0);
 	else
 		return (-1);
-}
-
-/**
-  * _freenv - a function that
-	* frees the environment
-  * Return: void
- */
-void _freenv(void)
-{
-	free_str_arr(new_environ, 1);
-	new_environ = NULL;
 }

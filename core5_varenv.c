@@ -4,10 +4,17 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 	char **input_ptr, char **cpy_ptr, char **key_ptr);
 char *eval_n_expand(char **str_p);
 
+/**
+ * resize_s_arr -a function that expands a string array
+ * @sarr_ptr: the address of the string array
+ * @count: the length gained
+ * Return: void
+ **/
 static void resize_s_arr(char ***sarr_ptr, int count)
 {
 	if (count >= 200)
-		*sarr_ptr = (char **)_realloc_ptr(*sarr_ptr, _al_len_(*sarr_ptr), _al_len_(*sarr_ptr) + (2 * sizeof(char *)));
+		*sarr_ptr = (char **)_realloc_ptr(*sarr_ptr,
+		_al_len_(*sarr_ptr), _al_len_(*sarr_ptr) + (2 * sizeof(char *)));
 }
 /**
  * _getall_vars - a function that retrieves
@@ -57,6 +64,7 @@ char *_getvar(char *input)
 		}
 		current = current->next;
 	}
+	empty_state_buff("=");
 
 	return (NULL);
 }
@@ -191,7 +199,6 @@ char *lookup_var(char *input)
 	buff = _getvar(input);
 	if (!buff)
 		buff = _getenv(input + 1);
-	// printf("variable is :%s\n", buff);
 
 	return (buff);
 }
@@ -199,7 +206,7 @@ char *lookup_var(char *input)
 /**
   * var_replace - a function that does
 	* a variable expansion on input strings
-  * @string: the input string
+  * @str: the input string
   * Return: char *.
 	* description: checked
  */
@@ -240,7 +247,7 @@ char *var_replace(char *str)
 		}
 		else
 		{
-			tmp_sub = _strddup(sub_str), s_ind = 1 + first_oc(is_n_var, sub_str); 
+			tmp_sub = _strddup(sub_str), s_ind = 1 + first_oc(is_n_var, sub_str);
 			if (s_ind > _strlen(str))
 				s_ind = _strlen(str);
 			tmp_sub[s_ind] = '\0', s_arr[count++] = tmp_sub;

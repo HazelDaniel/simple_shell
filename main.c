@@ -27,6 +27,7 @@ void handle_signal(int sig)
 		write(STDIN_FILENO, "\n", 1);
 		write(STDIN_FILENO, prompt, _strlen(prompt));
 	}
+	free(sig_str);
 }
 
 /**

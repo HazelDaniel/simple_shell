@@ -66,7 +66,7 @@ $
 
 ###### The program should be compiled with
 >
-> gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c utils/*.c -o seashell
+> gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c utils/\*.c -o seashell
 
 <hr>
 

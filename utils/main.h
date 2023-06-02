@@ -15,6 +15,7 @@
 /* MACROS */
 #define __cp__(x, y) (_strcpy(&x, &y))
 #define _al_len_(x) ((_len_p((void **)x)) + (1))
+#define _free_(x) (_free((void *)&x))
 #define EXIT (-3)
 #define BUFF_LEN 1024
 #define true (1)
@@ -118,6 +119,7 @@ void **_realloc_ptr(void *ptr, size_t old_size, size_t size);
 void *_realloc(void *ptr, size_t old_size, size_t size);
 void _memcpy(void *ptr, const void *newptr, unsigned int size);
 void _memcpy_ptr(void **ptr, void **newptr, unsigned int size);
+void _free(void **ptr);
 
 /* LIST UTILS */
 void append_comm_list(comm_list_t list);

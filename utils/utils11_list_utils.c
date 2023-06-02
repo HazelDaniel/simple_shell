@@ -5,7 +5,7 @@
  * @path: string of path value
  * Return: pointer to the created linked list
  */
-pathdir_t *linkpath(char *path)
+void linkpath(char *path)
 {
 	pathdir_t *head = NULL;
 	char *token;
@@ -19,8 +19,6 @@ pathdir_t *linkpath(char *path)
 	}
 	empty_state_buff(":");
 	_free_(cpath);
-
-	return (head);
 }
 
 /**

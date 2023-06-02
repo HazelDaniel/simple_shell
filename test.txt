@@ -1,3 +1,0 @@
-\tls || echo hello world ; cd utils && echo hello world ;
-cd utils && ps && pwd || head -n 1 main.h && la ; echo $PATH || head -n 4 main.h && whoami || ls -l
-ps && echo hello world || whoami ; ls && echo proc && pwd ; echo done

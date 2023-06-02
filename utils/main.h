@@ -13,7 +13,7 @@
 #include <errno.h>
 
 /* MACROS */
-#define __cp__(x, y) (_strcpy(&x, &y))
+#define __cp__(x, y) (_strcpy(&(x), &(y)))
 #define _al_len_(x) ((_len_p((void **)x)) + (1))
 #define _free_(x) (_free((void *)&(x)))
 #define EXIT (-3)
@@ -137,7 +137,7 @@ void remove_trash(char *value);
 void clear_trash();
 void print_trash();
 trashenv_t *pop_trash();
-pathdir_t *linkpath(char *path);
+void linkpath(char *path);
 void append_path(char *value);
 void print_path();
 void free_path();

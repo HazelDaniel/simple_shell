@@ -2,13 +2,12 @@
 
 /* GLOBAL DECLARATIONS */
 comm_list_t *commands = NULL;
-int comms_index = -1;
+int hist;
 char **new_environ = NULL, *name, *callpwd;
 trashenv_t *env_trash = NULL;
 pathdir_t *path_list = NULL;
 alias_t *aliases = NULL;
 var_t *variables = NULL;
-int hist;
 char *prompts[10] =
 {"_$ ", " ___($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
 
@@ -30,6 +29,27 @@ void handle_signal(int sig)
 	}
 }
 
+/**
+ * initialize - a function that initializes
+ * the necessary resources needed to run all
+ * processes.
+ * @argv: parameter of type char *[]
+ * Return: void
+ **/
+void init(char *argv[])
+{
+	pid_t pid = getpid();
+	char *path_str;
+
+	_copyenv(), create_pid(pid);
+	_setenv("?", "0");
+	set_exec_dir(argv), atexit(exec_on_exit);
+	path_str = _getenv("PATH");
+	linkpath(path_str);
+	name = argv[0];
+	hist = 1;
+	free(path_str);
+}
 
 /**
  * main - the entry point into the program
@@ -40,19 +60,11 @@ void handle_signal(int sig)
  **/
 int main(int argc, char *argv[], char *envp[])
 {
-	char *buff = NULL, **cmd, *path_str;
+	char *buff = NULL;
 	int status;
 	size_t read = 0, size = 0, ret_count;
-	pid_t pid = getpid();
 
-	_copyenv(), create_pid(pid);
-	_setenv("?", "0");
-	set_exec_dir(argv), atexit(exec_on_exit);
-	path_str = _getenv("PATH");
-	linkpath(path_str);
-	name = argv[0], (void)envp;
-	hist = 1;
-
+	init(argv);
 	while (1)
 	{
 		prompt = var_replace(prompts[1]);
@@ -74,7 +86,6 @@ int main(int argc, char *argv[], char *envp[])
 			ret_count += exec_all_commands();
 			free_commands();
 		}
-
 		_free_(prompt), _free_(buff);
 	}
 

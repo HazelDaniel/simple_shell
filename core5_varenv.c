@@ -77,15 +77,12 @@ char *_getvar(char *input)
  **/
 int _setvar(char *input)
 {
-	var_t *current = variables, *new_var, *prev;
+	var_t *current = variables, *new_var;
 	char *cpy = NULL, *key = NULL;
 
-	if (is_start_str("$", input) &&
-		!(is_start_str("$=", input)) &&
+	if (is_start_str("$", input) && !(is_start_str("$=", input)) &&
 		!(is_start_str("?=", input)))
-	{
 		return (0);
-	}
 
 	new_var = (var_t *)malloc(sizeof(var_t));
 	if (!new_var)
@@ -98,7 +95,6 @@ int _setvar(char *input)
 	}
 	cpy = _strddup(input), key = _strddup(_strtok(cpy, "="));
 	empty_state_buff("="), current = variables;
-
 	if (!current->next)
 	{
 		if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
@@ -154,7 +150,6 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 /**
   * free_vars - a function that frees
 	* the shell variables
-  * @list: parameter of type char var_t *
   * Return: void
  */
 void free_vars()

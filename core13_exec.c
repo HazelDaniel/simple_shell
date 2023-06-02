@@ -8,7 +8,7 @@
 int execute(char *comm_str)
 {
 	char **args, *tmp, *res_tmp, *command = _strddup(comm_str);
-	int (*f)(char **list), ret_num = 0, indic, status;
+	int (*f)(char **list), ret_num = 0, status;
 	pid_t child_pid;
 
 	args = _splitstr(command, "\n\r\a\t ");
@@ -28,7 +28,10 @@ int execute(char *comm_str)
 			if (command && command[0] != '/' && command[0] != '.')
 			{
 				command = _trace(command);
-				free(args[0]), args[0] = command, indic = 1;
+				if (!command)
+					command = args[0];
+				else
+					free(args[0]), args[0] = command;
 			}
 			if (!command || (access(command, F_OK) == -1))
 			{
@@ -95,9 +98,9 @@ int create_ex_stat(int status)
 		free(tmp);
 		return (1);
 	}
-	res[0] = '?', res[1] = '=';
-	res[_strlen(tmp) + 2] = '\0';
+	_memcpy("?=", res, 2);
 	_memcpy(tmp, res + 2, _strlen(tmp));
+	res[_strlen(tmp) + 2] = '\0';
 	if (!_setvar(res))
 	{
 		free(tmp), free(res);

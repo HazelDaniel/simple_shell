@@ -45,7 +45,7 @@ int exec_comms(const comm_list_t list)
 
 /**
   * eval_comms - a function that checks for nested
-	* flows (&&, and || separators basically) and creates
+	* flows (&&, and || separated commands) and creates
 	* another flow list
   * @list: parameter of type const size_t .
   * Return: int .
@@ -100,6 +100,7 @@ int exec_all_commands(void)
 		current = commands[i];
 		ret_count += exec_comms(current);
 	}
+	hist++;
 	return (ret_count);
 }
 

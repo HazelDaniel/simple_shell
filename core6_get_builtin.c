@@ -240,8 +240,11 @@ int handle_st_tilds(char **old_cptr, char **curr_cptr,
 		home = _realloc(home, _strlen(home) + 1, _strlen(home) + _strlen(user) + 1);
 		_memcpy(user, home + 6, _strlen(user));
 		if (chdir(home) != 0)
+		{
+			free(user), free(home), free(parent);
 			return (create_error(args, 2));
-		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(parent), free(home);
+		}
+		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff));
 	}
 	else
 	{
@@ -257,18 +260,24 @@ int handle_st_tilds(char **old_cptr, char **curr_cptr,
 			_strncpy(res + _strlen(home) + _strlen(user), loc + x + 1,
 			_strlen(loc + x + 1));
 			if (chdir(res) != 0)
+			{
+				free(user), free(home), free(parent);
 				return (create_error(args, 2));
+			}
 			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
 		}
 		else
 		{
 			res = _strddup(loc);
 			if (chdir(res) != 0)
+			{
+				free(user), free(home), free(parent);
 				return (create_error(args, 2));
+			}
 			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
 		}
-		free(parent);
 	}
+	free(user), free(parent), free(home);
 	return (0);
 }
 
@@ -303,25 +312,36 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
 		if (x == 1)
 		{
 			if (chdir(home) != 0)
+			{
+				free(home), free(user);
 				return (create_error(args, 2));
+			}
 		}
 		else
 		{
 			if (!prev)
 			{
 				if (chdir(old_cpy) != 0)
+				{
+					free(home), free(user);
 					return (create_error(args, 2));
+				}
 			}
 			else
 			{
 				if (chdir(prev) != 0)
+				{
+					free(home), free(user);
 					return (create_error(args, 2));
+				}
 			}
 		}
-		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(home);
+		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)),
+		free(home), free(user);
 	}
 	else
 	{
+		free(home), free(user);
 		return (create_error(args, 2));
 	}
 	return (0);

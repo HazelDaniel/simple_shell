@@ -10,7 +10,7 @@ alias_t *aliases = NULL;
 var_t *variables = NULL;
 int hist;
 char *prompts[10] =
-{"_$ ", " ___(($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
+{"_$ ", " ___($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
 
 /**
  * handle_signal - the signal handler for CTRL-C
@@ -21,10 +21,9 @@ void handle_signal(int sig)
 {
 	char *sig_str = _itoa(sig);
 
-	(void)sig;
 	if (isatty(STDIN_FILENO))
 	{
-		signal(SIGINT, handle_signal);
+		signal(sig, handle_signal);
 		fflush(stdin);
 		write(STDIN_FILENO, "\n", 1);
 		write(STDIN_FILENO, prompt, _strlen(prompt));
@@ -41,43 +40,25 @@ void handle_signal(int sig)
  **/
 int main(int argc, char *argv[], char *envp[])
 {
-	char *buff = NULL, **cmd, *path_str;
-	int status;
-	size_t read = 0, size = 0, ret_count;
-	pid_t pid = getpid();
+	char *res, *tmp, *p_tmp;
+	int stat;
 
-	_copyenv(), create_pid(pid);
-	_setenv("?", "0");
-	set_exec_dir(argv), atexit(exec_on_exit);
-	path_str = _getenv("PATH");
-	linkpath(path_str);
-	name = argv[0], (void)envp;
-	hist = 1;
+	stat = _setvar("res=4");
+	if (stat)
+		stat = _setvar("res=4");
+	if (stat)
+		stat = _setvar("res=2");
+	p_tmp = _strddup("res=4");
+	if (stat)
+		stat = _setvar(p_tmp);
+	free(p_tmp);
+	p_tmp = _strddup("res=4");
+	if (stat)
+		stat = _setvar(p_tmp);
+	tmp = _getvar("$res");
+	printf("result is :%s\n", tmp);
 
-	while (1)
-	{
-		prompt = var_replace(prompts[1]);
-		buff = malloc(BUFF_LEN * sizeof(char));
-		printf("%s", prompt);
-		signal(SIGINT, handle_signal);
-		read = _getline(&buff, &size, STDIN_FILENO);
-		if (read == EOF)
-		{
-			free(buff);
-			break;
-		}
-		if (read != EOF)
-		{
-			status = parse_to_commands(buff);
-			if (status == -1)
-				return (status);
-			ret_count += exec_all_commands();
-			free_commands();
-		}
-
-		free(prompt), free(buff);
-		buff = NULL, prompt = NULL;
-	}
-
-	return (ret_count);
+	cleanup();
+	free(tmp), free(p_tmp);
+	return (0);
 }

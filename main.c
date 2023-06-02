@@ -21,10 +21,9 @@ void handle_signal(int sig)
 {
 	char *sig_str = _itoa(sig);
 
-	(void)sig;
 	if (isatty(STDIN_FILENO))
 	{
-		signal(SIGINT, handle_signal);
+		signal(sig, handle_signal);
 		fflush(stdin);
 		write(STDIN_FILENO, "\n", 1);
 		write(STDIN_FILENO, prompt, _strlen(prompt));

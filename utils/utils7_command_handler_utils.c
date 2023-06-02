@@ -14,7 +14,7 @@ int parse_to_commands(char *string)
 	if (!all_commands)
 		return (-1);
 	handle_parsed_commands(all_commands);
-	free(cmd_list);
+	free(cmd_list), free_str_arr(all_commands, 1);
 
 	return (0);
 }

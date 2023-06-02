@@ -50,13 +50,13 @@ $ echo "qwerty" | /bin/../bin/sh
 $
 ```
 
-###### Example of an error on the program `hsh`
+###### Example of an error on the program `seashell`
 
 ```shell
-$ echo "qwerty" | ./hsh
-./hsh: 1: qwerty: not found
-$ echo "qwerty" | ./././hsh
-./././hsh: 1: qwerty: not found
+$ echo "qwerty" | ./seashell
+./seashell: 1: qwerty: not found
+$ echo "qwerty" | ./././seashell
+./././seashell: 1: qwerty: not found
 $
 ```
 
@@ -66,7 +66,7 @@ $
 
 ###### The program should be compiled with
 >
-> gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+> gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c utils/*.c -o seashell
 
 <hr>
 
@@ -75,9 +75,9 @@ $
 ###### Your code should work like this in interactive mode
 
 ```shell
-$ ./hsh
+$ ./seashell
 ($) /bin/ls
-hsh main.c shell.c
+seashell main.c shell.c
 ($)
 ($) exit
 $
@@ -86,14 +86,14 @@ $
 ###### But also in non-interactive mode
 
 ```shell
-$ echo "/bin/ls" | ./hsh
-hsh main.c shell.c test_ls_2
+$ echo "/bin/ls" | ./seashell
+seashell main.c shell.c test_ls_2
 $
 $ cat test_ls_2
 /bin/ls
 /bin/ls
 $
-$ cat test_ls_2 | ./hsh
-hsh main.c shell.c test_ls_2
-hsh main.c shell.c test_ls_2
+$ cat test_ls_2 | ./seashell
+seashell main.c shell.c test_ls_2
+seashell main.c shell.c test_ls_2
 $

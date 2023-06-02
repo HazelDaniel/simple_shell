@@ -26,7 +26,7 @@ char *_trace(char *input)
 		_memcpy(input, buff + dir_len + 1, input_len);
 		if (buff && access(buff, F_OK) == 0)
 			return (buff);
-		free(buff);
+		_free_(buff);
 		buff = NULL;
 		current = current->next;
 	}

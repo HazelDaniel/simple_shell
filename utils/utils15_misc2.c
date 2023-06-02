@@ -116,7 +116,7 @@ wtok_t *gen_tok(char *str)
 	new_tok->check_points[count] = -1;
 	if (!count)
 	{
-		free(new_tok);
+		_free_(new_tok);
 		return (NULL);
 	}
 	return (new_tok);

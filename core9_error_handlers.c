@@ -37,7 +37,7 @@ int create_error(char **args, int err)
 	write(STDERR_FILENO, error, _strlen(error));
 
 	if (error)
-		free(error);
+		_free_(error);
 	return (err);
 
 }

@@ -15,7 +15,7 @@ int execute(char *comm_str)
 	format_args(args);
 	if (args && args[0])
 	{
-		free(command), command = args[0];
+		_free_(command), command = args[0];
 		f = get_builtin(command);
 		if (f)
 		{
@@ -31,7 +31,7 @@ int execute(char *comm_str)
 				if (!command)
 					command = args[0];
 				else
-					free(args[0]), args[0] = command;
+					_free_(args[0]), args[0] = command;
 			}
 			if (!command || (access(command, F_OK) == -1))
 			{
@@ -95,7 +95,7 @@ int create_ex_stat(int status)
 	res = malloc(_strlen(tmp) + 3);
 	if (!res)
 	{
-		free(tmp);
+		_free_(tmp);
 		return (1);
 	}
 	_memcpy("?=", res, 2);
@@ -103,10 +103,10 @@ int create_ex_stat(int status)
 	res[_strlen(tmp) + 2] = '\0';
 	if (!_setvar(res))
 	{
-		free(tmp), free(res);
+		_free_(tmp), _free_(res);
 		return (1);
 	}
-	free(tmp), free(res);
+	_free_(tmp), _free_(res);
 
 	return (0);
 }
@@ -128,17 +128,17 @@ int create_pid(int pid)
 	res = malloc(_strlen(tmp) + 3);
 	if (!res)
 	{
-		free(tmp);
+		_free_(tmp);
 		return (1);
 	}
 	res[0] = '$', res[1] = '=';
 	_memcpy(tmp, res + 2, _strlen(tmp));
 	if (!_setvar(res))
 	{
-		free(tmp), free(res);
+		_free_(tmp), _free_(res);
 		return (1);
 	}
-	free(tmp), free(res);
+	_free_(tmp), _free_(res);
 
 	return (0);
 }

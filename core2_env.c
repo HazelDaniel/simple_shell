@@ -70,20 +70,19 @@ int _setenv(char *input1, char *input2)
 		val_equiv = _strddup(new_environ[i]), val_equiv[l_word + 1] = '\0';
 		if (!_strcmp(input1, val_equiv))
 		{
-			free(new_environ[i]), free(val_equiv), val_equiv = NULL;
+			_free_((new_environ[i])), _free_(val_equiv);
 			new_environ[i] = NULL, new_environ[i] = new_val;
 			return (0);
 		}
-		free(val_equiv), val_equiv = NULL;
+		_free_(val_equiv);
 	}
 	trash_equiv = pop_trash();
 	if (trash_equiv)
 	{
-		free(new_environ[*(trash_equiv->index)]);
-		new_environ[*(trash_equiv->index)] = NULL;
+		_free_((new_environ[*(trash_equiv->index)]));
 		new_environ[*(trash_equiv->index)] = new_val;
-		free(trash_equiv->index), free(trash_equiv->value);
-		free(trash_equiv), trash_equiv = NULL;
+		_free_((trash_equiv->index)), _free_((trash_equiv->value));
+		_free_(trash_equiv);
 		return (0);
 	}
 	new_environ = (char **)_realloc_ptr(new_environ, p_len,
@@ -127,7 +126,7 @@ int _unsetenv(char *value)
 	{
 		if (is_start_str(value, new_environ[i]))
 		{
-			free(new_environ[i]);
+			_free_((new_environ[i]));
 			new_environ[i] = _strddup("|=|");
 			append_trash(_strddup(value), i);
 			break;

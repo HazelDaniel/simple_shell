@@ -155,7 +155,7 @@ char **_log_split(char *str, char *delim)
 		if (!res_buff[res_index])
 		{
 			for (i = 0; i < res_index; i++)
-				free(res_buff[i]), free(trimmed);
+				_free_(res_buff[i]), _free_(trimmed);
 			return (NULL);
 		}
 		res_buff[res_index][count] = '\0';
@@ -168,13 +168,13 @@ char **_log_split(char *str, char *delim)
 	res_str = malloc((res_index) * sizeof(char *) + sizeof(char *));
 	if (res_str == NULL)
 	{
-		free_str_arr(res_buff, 0), free(trimmed);
+		free_str_arr(res_buff, 0), _free_(trimmed);
 		return (NULL);
 	}
 	res_str[res_index] = NULL;
 	for (i = 0; i < res_index; i++)
 		res_str[i] = res_buff[i];
-	free(trimmed);
+	_free_(trimmed);
 
 	return (res_str);
 }

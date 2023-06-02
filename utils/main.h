@@ -15,7 +15,7 @@
 /* MACROS */
 #define __cp__(x, y) (_strcpy(&x, &y))
 #define _al_len_(x) ((_len_p((void **)x)) + (1))
-#define _free_(x) (_free((void *)&x))
+#define _free_(x) (_free((void *)&(x)))
 #define EXIT (-3)
 #define BUFF_LEN 1024
 #define true (1)

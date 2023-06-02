@@ -27,20 +27,19 @@ void clear_comms(comm_list_t *list)
 	{
 		if (current->next == NULL)
 		{
-			free(current->status);
-			free(current->command);
-			free(current->separator);
-			free(current);
-			current = NULL;
+			_free_(current->status);
+			_free_(current->command);
+			_free_(current->separator);
+			_free_(current);
 			return;
 		}
 		next = current->next;
 		if (current->is_linked)
 			clear_comms(&(current->list));
-		free(current->status);
-		free(current->command);
-		free(current->separator);
-		free(current);
+		_free_(current->status);
+		_free_(current->command);
+		_free_(current->separator);
+		_free_(current);
 		current = next;
 	}
 }
@@ -61,8 +60,7 @@ void free_commands(void)
 	{
 		clear_comms(&(commands[i]));
 	}
-	free(commands);
-	commands = NULL;
+	_free_(commands);
 }
 
 /**
@@ -89,9 +87,8 @@ void remove_command(comm_t **list, int value)
 			*list = current->next;
 		else
 			prev->next = current->next;
-		free(current->command);
-		free(current->status);
-		free(current);
-		current = NULL;
+		_free_(current->command);
+		_free_(current->status);
+		_free_(current);
 	}
 }

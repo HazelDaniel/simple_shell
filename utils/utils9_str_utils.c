@@ -121,7 +121,7 @@ char **word_tok(char *str)
 	s_arr = malloc(sizeof(char *) * (count + 1));
 	if (!s_arr)
 	{
-		free(new_tok);
+		_free_(new_tok);
 		return (NULL);
 	}
 	s_arr[count] = NULL;
@@ -131,14 +131,14 @@ char **word_tok(char *str)
 		n_str = malloc(_strlen(cpy + point + 1) + 2);
 		if (!n_str)
 		{
-			free(new_tok), free_str_arr(s_arr, 1);
+			_free_(new_tok), free_str_arr(s_arr, 1);
 			return (NULL);
 		}
 		n_str[_strlen(cpy + point + 1) + 1] = '\0';
 		_memcpy((cpy + point + 1), n_str + 1, _strlen(cpy + point + 1));
 		n_str[0] = new_tok->vals[i], s_arr[i] = _strddup(n_str), n_str = NULL;
 	}
-	free(new_tok);
+	_free_(new_tok);
 
 	return (s_arr);
 }

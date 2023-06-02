@@ -93,7 +93,7 @@ char *_setalias(char *input)
 	&new_alias, &input, &cpy, &key))
 		return (current->value);
 	current->next = new_alias;
-	free(cpy);
+	_free_(cpy);
 
 	return (new_alias->value);
 }
@@ -114,14 +114,13 @@ void free_aliases(alias_t *list)
 	{
 		if (current->next == NULL)
 		{
-			free(current->value);
-			free(current);
-			current = NULL;
+			_free_(current->value);
+			_free_(current);
 			return;
 		}
 		next = current->next;
-		free(current->value);
-		free(current);
+		_free_(current->value);
+		_free_(current);
 		current = next;
 	}
 	list = NULL;
@@ -158,13 +157,13 @@ static int compare_and_sub(alias_t **current_ptr, alias_t **new_ptr,
 {
 	if (!_strcmp(((*current_ptr)->value), *input_ptr))
 	{
-		free((*new_ptr)->value), free(*cpy_ptr), free(*new_ptr);
+		_free_((*new_ptr)->value), _free_(*cpy_ptr), _free_(*new_ptr);
 		return (1);
 	}
 	else if (is_start_str(*key_ptr, (*current_ptr)->value))
 	{
-		free((*new_ptr)->value), free((*current_ptr)->value),
-		free(*cpy_ptr);
+		_free_((*new_ptr)->value), _free_((*current_ptr)->value),
+		_free_(*cpy_ptr);
 		(*current_ptr)->value = _strddup(*input_ptr);
 		return (1);
 	}

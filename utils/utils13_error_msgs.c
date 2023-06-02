@@ -19,7 +19,7 @@ char *error_env(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -30,7 +30,7 @@ char *error_env(char **args)
 	_strncat(error, args[0], _strlen(args[0]));
 	_strncat(error, ": Unable to add/remove from environment\n", 40);
 
-	free(hist_str);
+	_free_(hist_str);
 	return (error);
 }
 
@@ -76,7 +76,7 @@ char *error_2_exit(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -87,7 +87,7 @@ char *error_2_exit(char **args)
 	_strncat(error, args[0], _strlen(args[0]));
 	_strncat(error, "\n", 1);
 
-	free(hist_str);
+	_free_(hist_str);
 	return (error);
 }
 
@@ -116,7 +116,7 @@ char *error_2_cd(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -130,7 +130,7 @@ char *error_2_cd(char **args)
 	_strncat(error, args[0], _strlen(args[0]));
 	_strncat(error, "\n", 1);
 
-	free(hist_str);
+	_free_(hist_str);
 	return (error);
 }
 
@@ -153,7 +153,7 @@ char *error_2_syntax(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -164,7 +164,7 @@ char *error_2_syntax(char **args)
 	_strncat(error, args[0], _strlen(args[0]));
 	_strncat(error, "\" unexpected\n", 14);
 
-	free(hist_str);
+	_free_(hist_str);
 
 	return (error);
 }

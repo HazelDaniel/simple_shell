@@ -35,7 +35,7 @@ void **_realloc_ptr(void *ptr, size_t old_size, size_t size)
 		res = malloc(size * sizeof(void *));
 		if (res == NULL)
 		{
-			free(ptr);
+			_free_(ptr);
 			return (res);
 		}
 		res_tmp = (char **)res;
@@ -46,7 +46,7 @@ void **_realloc_ptr(void *ptr, size_t old_size, size_t size)
 			res_tmp[index] = *ptr_cp++;
 		}
 		--index, res_tmp[index] = NULL;
-		free(ptr);
+		_free_(ptr);
 	}
 	return (res);
 }
@@ -65,7 +65,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 
 	if (size == 0 && ptr)
 	{
-		free(ptr);
+		_free_(ptr);
 		return (NULL);
 	}
 	if (ptr == NULL)
@@ -83,7 +83,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 		res = malloc(size);
 		if (res == NULL)
 		{
-			free(ptr);
+			_free_(ptr);
 			return (res);
 		}
 		res_tmp = res;
@@ -94,7 +94,7 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 			res_tmp[index] = *ptr_cp++;
 		}
 		--index, res_tmp[index] = '\0';
-		free(ptr);
+		_free_(ptr);
 	}
 
 	return (res);
@@ -117,11 +117,11 @@ void free_str_arr(char **str_arr, int is_dyn)
 		return;
 	for (; str_arr[i]; i++)
 	{
-		free(str_arr[i]);
+		_free_(str_arr[i]);
 		str_arr[i] = NULL;
 	}
 	if (is_dyn)
-		free(str_arr);
+		_free_(str_arr);
 }
 
 /**

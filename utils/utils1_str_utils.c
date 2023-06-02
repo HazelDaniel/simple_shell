@@ -47,7 +47,7 @@ char *_strtok(char *str, char *delim)
 
 	if (str)
 	{
-		free(buff), _index = 0, _len = _strlen(str);
+		_free_(buff), _index = 0, _len = _strlen(str);
 		buff = malloc(sizeof(char) * _strlen(str) + 1);
 		if (!buff)
 			return (NULL);
@@ -66,7 +66,7 @@ char *_strtok(char *str, char *delim)
 	{
 		if (_index >= _len)
 		{
-			free(buff), buff = NULL;
+			_free_(buff);
 			return (NULL);
 		}
 		start = _index;
@@ -96,7 +96,7 @@ char *com_tok(char *str, char *delim)
 
 	if (str)
 	{
-		free(buff), _index = 0, i = _index, _len = _strlen(str);
+		_free_(buff), _index = 0, i = _index, _len = _strlen(str);
 		buff = malloc(sizeof(char) * _strlen(str) + 1);
 		if (!buff)
 			return (NULL);
@@ -120,7 +120,7 @@ char *com_tok(char *str, char *delim)
 	{
 		if (_index >= _len)
 		{
-			free(buff), buff = NULL;
+			_free_(buff);
 			return (NULL);
 		}
 		for (start = i = _index; buff[i] && !in_str(buff[i], delim); i++)

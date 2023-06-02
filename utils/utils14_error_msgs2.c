@@ -20,7 +20,7 @@ char *error_126(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -31,7 +31,7 @@ char *error_126(char **args)
 	_strncat(error, args[0], _strlen(args[0]));
 	_strncat(error, ": Permission denied\n", 21);
 
-	free(hist_str);
+	_free_(hist_str);
 	return (error);
 }
 
@@ -54,7 +54,7 @@ char *error_127(char **args)
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
-		free(hist_str);
+		_free_(hist_str);
 		return (NULL);
 	}
 
@@ -67,6 +67,6 @@ char *error_127(char **args)
 	_memcpy(": not found\n", error + _strlen(name) + 2
 	 + _strlen(hist_str) + 2 + _strlen(args[0]), 12);
 
-	free(hist_str);
+	_free_(hist_str);
 	return (error);
 }

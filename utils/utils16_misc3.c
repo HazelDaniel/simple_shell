@@ -8,10 +8,7 @@
 void norm_dyn_str(char **str_ptr)
 {
 	if (*str_ptr && !(*str_ptr)[0])
-	{
-		free(*str_ptr);
-		*str_ptr = NULL;
-	}
+		_free_(*str_ptr);
 }
 
 /**
@@ -71,7 +68,7 @@ void trim_str_arr(char **args)
 		last_nl = last_oc_of(tmp, '\n');
 		if (last_nl >= 0)
 			tmp[last_nl] = '\0';
-		free(args[i]), args[i] = NULL;
+		_free_(args[i]);
 		args[i] = tmp;
 	}
 }
@@ -92,9 +89,9 @@ void format_args(char **args)
 	for (i = 0; args[i]; i++)
 	{
 		tmp = _strddup(args[i]);
-		free(args[i]);
+		_free_(args[i]);
 		args[i] = comment_line(&(tmp));
-		free(tmp), tmp = NULL;
+		_free_(tmp);
 	}
 	for (i = 0; args[i]; i++)
 	{
@@ -102,7 +99,7 @@ void format_args(char **args)
 		{
 			tmp = var_replace(args[i]);
 			if (tmp)
-				free(args[i]), args[i] = tmp;
+				_free_(args[i]), args[i] = tmp;
 		}
 	}
 }

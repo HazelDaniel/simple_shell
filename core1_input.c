@@ -28,7 +28,7 @@ ssize_t _getline(char **line_addr, size_t *n, FILE *stream)
 		read_n = read(STDIN_FILENO, &read_c, 1);
 		if (read_n == -1 || (!read_n && !count))
 		{
-			free(buffer), buffer = NULL;
+			_free_(buffer);
 			return (-1);
 		}
 		if (!read_n && count)
@@ -45,7 +45,7 @@ ssize_t _getline(char **line_addr, size_t *n, FILE *stream)
 	}
 	buffer[count] = '\0';
 	if (read_c == '\n')
-		_memcpy(buffer, *line_addr, count), free(buffer), buffer = NULL;
+		_memcpy(buffer, *line_addr, count), _free_(buffer);
 	ret = count;
 	if (read_n)
 		count = 0;

@@ -50,15 +50,15 @@ void clear_trash()
 	{
 		if (current->next == NULL)
 		{
-			free(current->value);
-			free(current->index), free(current);
-			current = NULL, env_trash = current;
+			_free_(current->value);
+			_free_(current->index), _free_(current);
+			env_trash = current;
 			return;
 		}
 		next = current->next;
-		free(current->value);
-		free(current->index);
-		free(current);
+		_free_(current->value);
+		_free_(current->index);
+		_free_(current);
 		current = next;
 	}
 }
@@ -87,10 +87,9 @@ void remove_trash(char *value)
 			env_trash = current->next;
 		else
 			prev->next = current->next;
-		free(current->value);
-		free(current->index);
-		free(current);
-		current = NULL;
+		_free_(current->value);
+		_free_(current->index);
+		_free_(current);
 	}
 }
 

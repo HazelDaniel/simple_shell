@@ -14,7 +14,7 @@ int parse_to_commands(char *string)
 	if (!all_commands)
 		return (-1);
 	handle_parsed_commands(all_commands);
-	free(cmd_list), free_str_arr(all_commands, 1);
+	_free_(cmd_list), free_str_arr(all_commands, 1);
 
 	return (0);
 }
@@ -48,6 +48,6 @@ void handle_parsed_commands(char **all_commands)
 			append_comm(&c_list, '\0', all_commands[i], 0);
 		}
 		append_comm_list(c_list);
-		free(cmd_trim);
+		_free_(cmd_trim);
 	}
 }

@@ -88,7 +88,7 @@ int cd(char *loc, char **list)
 
 	old_cpy = getcwd(dir_buff, sizeof(dir_buff));
 	if (_len_p((void *)list) == 1 && last_oc(is_graph, loc) < 0)
-		free(loc), loc = NULL;
+		_free_(loc);
 	if (loc)
 	{
 		if (is_start_str("..", loc))
@@ -119,7 +119,7 @@ int cd(char *loc, char **list)
 	if (_setenv("OLDPWD", old_cpy) != 0)
 		return (-1);
 	old_cpy = _getenv("OLDPWD");
-	_memcpy(old_cpy, previous, _strlen(old_cpy)), free(old_cpy), old_cpy = NULL;
+	_memcpy(old_cpy, previous, _strlen(old_cpy)), _free_(old_cpy);
 	if (_setenv("PWD", curr_cpy) != 0)
 		return (-1);
 
@@ -184,10 +184,10 @@ int handle_st_dots(char **old_cptr, char **curr_cptr,
 	if (!_strcmp("..", loc))
 	{
 		if (!_strcmp("/home", old_cpy))
-			free(parent), parent = _strddup("/");
+			_free_(parent), parent = _strddup("/");
 		if (chdir(parent) != 0)
 			return (create_error(args, 2));
-		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(parent);
+		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), _free_(parent);
 	}
 	else
 	{
@@ -202,16 +202,16 @@ int handle_st_dots(char **old_cptr, char **curr_cptr,
 			_strncpy(res + _strlen(parent), loc + x + 1, _strlen(loc + x + 1));
 			if (chdir(res) != 0)
 				return (create_error(args, 2));
-			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
+			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), _free_(res);
 		}
 		else
 		{
 			res = _strddup(loc);
 			if (chdir(res) != 0)
 				return (create_error(args, 2));
-			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
+			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), _free_(res);
 		}
-		free(parent);
+		_free_(parent);
 	}
 	return (0);
 }
@@ -241,7 +241,7 @@ int handle_st_tilds(char **old_cptr, char **curr_cptr,
 		_memcpy(user, home + 6, _strlen(user));
 		if (chdir(home) != 0)
 		{
-			free(user), free(home), free(parent);
+			_free_(user), _free_(home), _free_(parent);
 			return (create_error(args, 2));
 		}
 		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff));
@@ -261,23 +261,23 @@ int handle_st_tilds(char **old_cptr, char **curr_cptr,
 			_strlen(loc + x + 1));
 			if (chdir(res) != 0)
 			{
-				free(user), free(home), free(parent);
+				_free_(user), _free_(home), _free_(parent);
 				return (create_error(args, 2));
 			}
-			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
+			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), _free_(res);
 		}
 		else
 		{
 			res = _strddup(loc);
 			if (chdir(res) != 0)
 			{
-				free(user), free(home), free(parent);
+				_free_(user), _free_(home), _free_(parent);
 				return (create_error(args, 2));
 			}
-			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), free(res);
+			*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)), _free_(res);
 		}
 	}
-	free(user), free(parent), free(home);
+	_free_(user), _free_(parent), _free_(home);
 	return (0);
 }
 
@@ -313,7 +313,7 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
 		{
 			if (chdir(home) != 0)
 			{
-				free(home), free(user);
+				_free_(home), _free_(user);
 				return (create_error(args, 2));
 			}
 		}
@@ -323,7 +323,7 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
 			{
 				if (chdir(old_cpy) != 0)
 				{
-					free(home), free(user);
+					_free_(home), _free_(user);
 					return (create_error(args, 2));
 				}
 			}
@@ -331,17 +331,17 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
 			{
 				if (chdir(prev) != 0)
 				{
-					free(home), free(user);
+					_free_(home), _free_(user);
 					return (create_error(args, 2));
 				}
 			}
 		}
 		*(curr_cptr) = getcwd(dir_buff, sizeof(dir_buff)),
-		free(home), free(user);
+		_free_(home), _free_(user);
 	}
 	else
 	{
-		free(home), free(user);
+		_free_(home), _free_(user);
 		return (create_error(args, 2));
 	}
 	return (0);

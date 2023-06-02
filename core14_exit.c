@@ -35,7 +35,7 @@ void exec_on_exit(void)
 			buff = _realloc(buff, _strlen(buff) + 1, _strlen(buff) + 121);
 			if (!buff)
 			{
-				free(callpwd);
+				_free_(callpwd);
 				return;
 			}
 		}
@@ -55,7 +55,7 @@ void exec_on_exit(void)
 	write(STDERR_FILENO, fd_str, _strlen(fd_str));
 	write(STDERR_FILENO, "\n", 1);
 
-	free(callpwd), free(fd_str), cleanup();
+	_free_(callpwd), _free_(fd_str), cleanup();
 }
 
 /**

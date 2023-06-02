@@ -63,7 +63,7 @@ int main(int argc, char *argv[], char *envp[])
 		read = _getline(&buff, &size, STDIN_FILENO);
 		if (read == EOF)
 		{
-			free(buff);
+			_free_(buff);
 			break;
 		}
 		if (read != EOF)
@@ -75,8 +75,7 @@ int main(int argc, char *argv[], char *envp[])
 			free_commands();
 		}
 
-		free(prompt), free(buff);
-		buff = NULL, prompt = NULL;
+		_free_(prompt), _free_(buff);
 	}
 
 	return (ret_count);

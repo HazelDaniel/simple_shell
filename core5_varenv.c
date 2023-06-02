@@ -59,7 +59,7 @@ char *_getvar(char *input)
 			token = _strtok(NULL, "=");
 			tok_cpy = _strddup(token);
 			empty_state_buff("=");
-			free(cp_buffer), cp_buffer = NULL;
+			_free_(cp_buffer);
 			return (tok_cpy);
 		}
 		current = current->next;
@@ -111,7 +111,7 @@ int _setvar(char *input)
 	if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
 		return (1);
 	current->next = new_var;
-	free(cpy), free(key);
+	_free_(cpy), _free_(key);
 
 	return (1);
 }
@@ -132,14 +132,14 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 {
 	if (!_strcmp(((*current_ptr)->value), *input_ptr))
 	{
-		free((*new_ptr)->value), free(*cpy_ptr), free(*new_ptr),
-		free(*key_ptr);
+		_free_((*new_ptr)->value), _free_(*cpy_ptr), _free_(*new_ptr),
+		_free_(*key_ptr);
 		return (1);
 	}
 	else if (is_start_str(*key_ptr, (*current_ptr)->value))
 	{
-		free((*new_ptr)->value), free((*current_ptr)->value),
-		free(*cpy_ptr), free(*key_ptr), free(*new_ptr);
+		_free_((*new_ptr)->value), _free_((*current_ptr)->value),
+		_free_(*cpy_ptr), _free_(*key_ptr), _free_(*new_ptr);
 		(*current_ptr)->value = _strddup(*input_ptr);
 		return (1);
 	}
@@ -161,8 +161,8 @@ void free_vars()
 	while (*current)
 	{
 		next = (*current)->next;
-		free((*current)->value);
-		free(*current);
+		_free_((*current)->value);
+		_free_(*current);
 		*current = next;
 	}
 	*current = NULL;
@@ -217,9 +217,9 @@ char *var_replace(char *str)
 				tmp_sub[0] = '$', tmp_sub[1] = sub_str[1], tmp_sub[2] = '\0';
 				sub_val = lookup_var(tmp_sub);
 				if (!sub_val)
-					s_arr[count++] = _strddup("$"), sub_str++, free(tmp_sub);
+					s_arr[count++] = _strddup("$"), sub_str++, _free_(tmp_sub);
 				else
-					s_arr[count++] = sub_val, sub_str += 2, free(tmp_sub);
+					s_arr[count++] = sub_val, sub_str += 2, _free_(tmp_sub);
 				continue;
 			}
 			tmp_sub = malloc((w_ind) + 1 + 1);
@@ -228,7 +228,7 @@ char *var_replace(char *str)
 			_memcpy(sub_str, tmp_sub, w_ind + 1), sub_val = lookup_var(tmp_sub);
 			s_arr[count++] = sub_val ? sub_val : tmp_sub;
 			if (sub_val)
-				free(tmp_sub), tmp_sub = NULL;
+				_free_(tmp_sub);
 			resize_s_arr(&s_arr, count), sub_str += w_ind + 1;
 		}
 		else

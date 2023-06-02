@@ -18,7 +18,7 @@ pathdir_t *linkpath(char *path)
 		token = _strtok(NULL, ":");
 	}
 	empty_state_buff(":");
-	free(cpath);
+	_free_(cpath);
 
 	return (head);
 }
@@ -48,7 +48,7 @@ void append_path(char *value)
 			current = current->next;
 		current->next = new_path;
 	}
-	free(cpy);
+	_free_(cpy);
 }
 
 /**
@@ -83,8 +83,8 @@ void free_path(void)
 	while (current)
 	{
 		next = current->next;
-		free(current->dir);
-		free(current);
+		_free_(current->dir);
+		_free_(current);
 		current = next;
 	}
 

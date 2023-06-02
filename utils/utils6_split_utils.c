@@ -18,8 +18,8 @@ void split_by_or(comm_list_t *c_list,
 	for (j = 0; raw_token[j]; j++)
 		append_comm(c_list, '|', raw_token[j], 0);
 
-	free(raw_token);
-	free(cmd_trim);
+	_free_(raw_token);
+	_free_(cmd_trim);
 }
 
 /**
@@ -40,8 +40,8 @@ void split_by_and(comm_list_t *c_list,
 	for (j = 0; raw_token[j]; j++)
 		append_comm(c_list, '&', raw_token[j], 0);
 
-	free(raw_token);
-	free(cmd_trim);
+	_free_(raw_token);
+	_free_(cmd_trim);
 }
 
 /**
@@ -73,8 +73,8 @@ void split_by_and_or_order(comm_list_t *c_list,
 			append_comm(c_list, '|', raw_token[j], 0);
 	}
 
-	free(raw_token);
-	free(cmd_trim);
+	_free_(raw_token);
+	_free_(cmd_trim);
 }
 
 
@@ -108,6 +108,6 @@ void split_by_or_and_order(comm_list_t *c_list,
 			split_by_and(c_list, raw_sub_token, raw_token[j]);
 	}
 
-	free(raw_token);
-	free(cmd_trim);
+	_free_(raw_token);
+	_free_(cmd_trim);
 }

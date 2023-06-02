@@ -53,7 +53,7 @@ int handle_alias(char **args)
 	int i, ret_count = 0;
 
 	if (_len_p((void *)args) == 1 && last_oc(is_word, *args) < 0)
-		free(*args), *args = NULL;
+		_free_(*args);
 	if (!args || !args[0])
 		return (alias(NULL));
 	for (i = 0; args[i]; i++)

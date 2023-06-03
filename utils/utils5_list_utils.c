@@ -106,7 +106,6 @@ void append_comm_list(comm_list_t list)
 	if (!commands)
 		return;
 	commands[index++] = list;
-	// p_len = _al_len_(commands);
 	if (!commands)
 		commands = tmp;
 	else

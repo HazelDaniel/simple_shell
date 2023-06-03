@@ -92,15 +92,7 @@ int create_ex_stat(int status)
 	tmp = _itoa(status);
 	if (!tmp)
 		return (1);
-	res = malloc(_strlen(tmp) + 3);
-	if (!res)
-	{
-		_free_(tmp);
-		return (1);
-	}
-	_memcpy("?=", res, 2);
-	_memcpy(tmp, res + 2, _strlen(tmp));
-	res[_strlen(tmp) + 2] = '\0';
+	res = _strvcat("?=", tmp, NULL);
 	if (!_setvar(res))
 	{
 		_free_(tmp), _free_(res);

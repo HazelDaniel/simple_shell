@@ -76,7 +76,7 @@ unsigned int _strlen(char *str)
 **/
 char *_strncat(char *dest, char *src, int n)
 {
-	int dest_count = 0, src_count = 0, ind = 0, i;
+	int ind = 0, i;
 	unsigned int res_len = 0;
 	char *res = NULL;
 
@@ -89,9 +89,9 @@ char *_strncat(char *dest, char *src, int n)
 		return (NULL);
 	res[res_len] = '\0';
 
-	for (ind = 0; dest[ind]; ind++)
+	for (ind = 0; dest && dest[ind]; ind++)
 		res[ind] = dest[ind];
-	for (i = 0; i < n && src[i]; ind++, i++)
+	for (i = 0; i < n && src && src[i]; ind++, i++)
 		res[ind] = src[i];
 
 	return (res);
@@ -108,11 +108,12 @@ char *_strncat(char *dest, char *src, int n)
 **/
 char *_strdcat(char *dest, char *src)
 {
-	int dest_count = 0, src_count = 0, ind = 0, i;
-	unsigned int res_len = 0;
+	int dest_count = 0, src_count = 0, ind = 0;
+	unsigned int res_len = 0, i, dest_len, src_len;
 	char *res = NULL;
 
-	res_len = _strlen(src) + _strlen(dest);
+	dest_len = _strlen(dest), src_len = _strlen(src);
+	res_len = dest_len + src_len;
 
 	res = malloc((res_len) * sizeof(char) + 1);
 	if (!res)
@@ -121,7 +122,7 @@ char *_strdcat(char *dest, char *src)
 		return (NULL);
 	res[res_len] = '\0';
 
-	for (ind = 0; dest[ind]; ind++)
+	for (ind = 0; ind < dest_len; ind++)
 		res[ind] = dest[ind];
 	for (i = 0; ind < res_len; ind++)
 		res[ind] = src[i++];

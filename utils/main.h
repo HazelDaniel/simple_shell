@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <errno.h>
+#include <stdarg.h>
 
 /* MACROS */
 #define __cp__(x, y) (_strcpy(&(x), &(y)))
@@ -101,6 +102,7 @@ char *_strddup(char *src);
 int _strcmp(char *str1, char *str2);
 unsigned int _strlen(char *str);
 char *_strncat(char *dest, char *src, int n);
+char *_strvcat(char *first_str, ...);
 char *_strdcat(char *dest, char *src);
 int adj_char_num(char *str, char c, int i);
 int first_oc_of(char *str, char c);

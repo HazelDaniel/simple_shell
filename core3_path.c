@@ -17,13 +17,7 @@ char *_trace(char *input)
 	while (current)
 	{
 		dir_len = _strlen(current->dir), input_len = _strlen(input);
-		buff = malloc(dir_len + input_len + 2);
-		if (!buff)
-			return (NULL);
-		buff[dir_len + input_len + 1] = '\0';
-		_memcpy(current->dir, buff, dir_len);
-		_memcpy(slash, buff + dir_len, 1);
-		_memcpy(input, buff + dir_len + 1, input_len);
+		buff = _strvcat(current->dir, slash, input, NULL);
 		if (buff && access(buff, F_OK) == 0)
 			return (buff);
 		_free_(buff);

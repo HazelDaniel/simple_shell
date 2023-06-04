@@ -31,7 +31,7 @@ void handle_parsed_commands(char **all_commands)
 
 	for (i = 0; all_commands[i]; i++)
 	{
-		char *cmd_trim = _trim(all_commands[i]), *sub_cmd_trim = NULL;
+		char *cmd_trim = _trim(all_commands[i]);
 		char **all_c = NULL;
 		comm_list_t c_list = NULL;
 

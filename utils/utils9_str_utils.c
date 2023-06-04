@@ -73,7 +73,7 @@ char *rm_tr_slash(char *str)
 char *join_list(char **list)
 {
 	char *acc = NULL;
-	int i, j, acc_len = 0, prev_len = 0, next_len = 0;
+	int i, acc_len = 0, prev_len = 0;
 
 	if (!list)
 		return (NULL);

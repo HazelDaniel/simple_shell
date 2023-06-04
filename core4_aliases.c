@@ -33,8 +33,6 @@ int alias(char *input)
  */
 char *_getalias(char *input)
 {
-	int i = 0;
-	char *token, *cp_buffer = NULL;
 	alias_t *current = aliases;
 
 	while (current)
@@ -132,7 +130,7 @@ void free_aliases(alias_t *list)
  */
 void print_aliases(void)
 {
-	alias_t *current = aliases, *next = NULL;
+	alias_t *current = aliases;
 
 	while (current)
 	{

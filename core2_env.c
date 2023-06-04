@@ -25,7 +25,7 @@ int getall_env(void)
 char *_getenv(char *input)
 {
 	int i = 0;
-	char *token, *cp_buffer = NULL, *tok_cpy;
+	char *token, *tok_cpy;
 
 	if (!new_environ)
 		return (NULL);
@@ -54,8 +54,8 @@ char *_getenv(char *input)
 int _setenv(char *input1, char *input2)
 {
 	int i = 0, len1 = _strlen(input1), len2 = _strlen(input2),
-	index = -1, p_len = _al_len_(new_environ), l_word;
-	char *new_val = NULL, **tmp_env = new_environ, *val_equiv;
+	p_len = _al_len_(new_environ), l_word;
+	char *new_val = NULL, *val_equiv;
 	trashenv_t *trash_equiv;
 
 	new_val = malloc((len1 + len2 + 2));
@@ -100,7 +100,7 @@ int _setenv(char *input1, char *input2)
  */
 void _copyenv(void)
 {
-	int count, i;
+	int count;
 
 	free_str_arr(new_environ, 1);
 	new_environ = NULL;
@@ -120,7 +120,7 @@ void _copyenv(void)
  */
 int _unsetenv(char *value)
 {
-	int count, i;
+	int i;
 
 	for (i = 0; new_environ[i]; i++)
 	{

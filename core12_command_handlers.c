@@ -11,8 +11,7 @@ int handle_linked_comms(void);
 int exec_comms(const comm_list_t list)
 {
 	const comm_t *current = list, *curr_head = NULL;
-	char **args, *command;
-	int (*f)(char **list), i, ret_count = 0;
+	int ret_count = 0;
 
 	while (current != NULL)
 	{
@@ -87,7 +86,7 @@ int eval_comms(const comm_list_t list)
 */
 int exec_all_commands(void)
 {
-	int i = 0, j = 0, ret_count = 0;
+	int i = 0, ret_count = 0;
 	comm_list_t current = NULL;
 
 	if (!commands)
@@ -112,7 +111,7 @@ int exec_all_commands(void)
 */
 int handle_linked_comms(void)
 {
-	int i = 0, j = 0, ret_count = 0;
+	int i = 0, ret_count = 0;
 	comm_list_t current = NULL;
 
 	if (!commands)

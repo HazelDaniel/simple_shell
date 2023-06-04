@@ -7,7 +7,7 @@
  **/
 int execute(char *comm_str)
 {
-	char **args, *tmp, *res_tmp, *command = _strddup(comm_str);
+	char **args, *command = _strddup(comm_str);
 	int (*f)(char **list), ret_num = 0, status;
 	pid_t child_pid;
 

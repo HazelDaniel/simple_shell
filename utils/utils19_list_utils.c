@@ -51,7 +51,7 @@ void clear_comms(comm_list_t *list)
  */
 void free_commands(void)
 {
-	int i = 0, j = 0;
+	int i = 0;
 
 	if (!commands)
 		return;

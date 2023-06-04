@@ -86,7 +86,6 @@ wtok_t *gen_tok(char *str)
 {
 	int i = 0, count = 0;
 	wtok_t *new_tok = NULL;
-	int s_len = _strlen(str);
 
 	if (!str)
 		return (NULL);

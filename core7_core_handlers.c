@@ -8,7 +8,6 @@
  */
 int handle_exit(char **args)
 {
-	char *input;
 
 	if (args)
 		return (exit_(*args, args));

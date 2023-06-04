@@ -9,11 +9,11 @@
 	* could be a desciptor or a stream
   * Return: ssize_t .
  */
-ssize_t _getline(char **line_addr, size_t *n, FILE *stream)
+ssize_t _getline(char **line_addr, FILE *stream)
 {
 	char *buffer = NULL, read_c = '\0';
 	static ssize_t count;
-	int read_n = 0, ret, i = 0;
+	int read_n = 0, ret;
 
 	if (count == 0)
 		fflush(stream);

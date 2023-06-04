@@ -7,7 +7,6 @@
  */
 void linkpath(char *path)
 {
-	pathdir_t *head = NULL;
 	char *token;
 	char *cpath = _strddup(path);
 

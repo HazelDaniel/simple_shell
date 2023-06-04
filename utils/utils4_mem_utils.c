@@ -39,9 +39,9 @@ void **_realloc_ptr(void *ptr, size_t old_size, size_t size)
 			return (res);
 		}
 		res_tmp = (char **)res;
-		for (index = 0; index < size; index++)
+		for (index = 0; index < (int)size; index++)
 		{
-			if (size > old_size && index == old_size)
+			if (size > old_size && index == (int)old_size)
 				break;
 			res_tmp[index] = *ptr_cp++;
 		}
@@ -87,9 +87,9 @@ void *_realloc(void *ptr, size_t old_size, size_t size)
 			return (res);
 		}
 		res_tmp = res;
-		for (index = 0; index < size; index++)
+		for (index = 0; index < (int)size; index++)
 		{
-			if (size > old_size && index == old_size)
+			if (size > old_size && index == (int)old_size)
 				break;
 			res_tmp[index] = *ptr_cp++;
 		}

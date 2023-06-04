@@ -80,13 +80,12 @@ int exit_(char *status, char **list)
  */
 int cd(char *loc, char **list)
 {
-	char dir_buff[BUFF_LEN], new_dir_buff[BUFF_LEN], *pwd = NULL,
-	*curr_cpy, *old_cpy, *parent, *res = NULL, prev_buff[BUFF_LEN];
+	char dir_buff[BUFF_LEN], new_dir_buff[BUFF_LEN],
+	*curr_cpy, *old_cpy;
 	struct stat dir;
-	int l_slash_oc = -1, x = -1;
 	static char previous[BUFF_LEN] = "";
 
-	old_cpy = getcwd(dir_buff, sizeof(dir_buff));
+	old_cpy = getcwd(dir_buff, sizeof(dir_buff)), (void)dir;
 	if (_len_p((void *)list) == 1 && last_oc(is_graph, loc) < 0)
 		_free_(loc);
 	if (loc)
@@ -180,7 +179,7 @@ int handle_st_dots(char **old_cptr, char **curr_cptr,
 	int l_slash_oc, x = -1;
 
 	parent = _strddup(old_cpy), l_slash_oc = last_oc_of(parent, '/');
-	parent[l_slash_oc] = '\0';
+	parent[l_slash_oc] = '\0', (void)prev;
 	if (!_strcmp("..", loc))
 	{
 		if (!_strcmp("/home", old_cpy))
@@ -234,7 +233,7 @@ int handle_st_tilds(char **old_cptr, char **curr_cptr,
 	int l_slash_oc, x = -1;
 
 	parent = _strddup(old_cpy), l_slash_oc = last_oc_of(parent, '/');
-	home = _strddup("/home/"), parent[l_slash_oc] = '\0';
+	home = _strddup("/home/"), parent[l_slash_oc] = '\0', (void)prev;
 	if (!_strcmp("~", loc))
 	{
 		home = _realloc(home, _strlen(home) + 1, _strlen(home) + _strlen(user) + 1);
@@ -295,9 +294,9 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
 	char *loc, char **args, char prev[BUFF_LEN])
 {
 	char *old_cpy = *old_cptr, dir_buff[BUFF_LEN],
-	*curr_cpy = *curr_cptr, *res = NULL, *home = NULL,
+	*home = NULL,
 	*user = _getenv("USER");
-	int l_slash_oc, x = -1;
+	int x = -1;
 
 	x = last_spn_oc(is_hyp, loc);
 	if (!prev || !prev[0])

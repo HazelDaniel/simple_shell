@@ -64,9 +64,9 @@ int main(int argc, char *argv[], char *envp[])
 {
 	char *buff = NULL;
 	int status;
-	size_t read = 0, size = 0, ret_count;
+	size_t read = 0, ret_count;
 
-	init(argv);
+	init(argv), (void)argc, (void)envp;
 	while (1)
 	{
 		prompt = var_replace(prompts[1]);
@@ -74,13 +74,13 @@ int main(int argc, char *argv[], char *envp[])
 		if (isatty(STDIN_FILENO))
 			printf("%s", prompt);
 		signal(SIGINT, handle_signal);
-		read = _getline(&buff, &size, STDIN_FILENO);
-		if (read == EOF)
+		read = _getline(&buff, STDIN_FILENO);
+		if (read == (size_t)EOF)
 		{
 			_free_(buff);
 			break;
 		}
-		if (read != EOF)
+		if (read != (size_t)EOF)
 		{
 			status = parse_to_commands(buff);
 			if (status == -1)

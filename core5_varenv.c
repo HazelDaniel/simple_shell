@@ -23,7 +23,6 @@ static void resize_s_arr(char ***sarr_ptr, int count)
  **/
 void _getall_vars(void)
 {
-	int i = 0;
 	var_t *current = variables;
 
 	if (!current)
@@ -44,7 +43,6 @@ void _getall_vars(void)
  **/
 char *_getvar(char *input)
 {
-	int i = 0;
 	char *token, *cp_buffer = NULL, *tok_cpy = NULL;
 	var_t *current = variables;
 
@@ -234,7 +232,7 @@ char *var_replace(char *str)
 		else
 		{
 			tmp_sub = _strddup(sub_str), s_ind = 1 + first_oc(is_n_var, sub_str);
-			if (s_ind > _strlen(str))
+			if (s_ind > (int)_strlen(str))
 				s_ind = _strlen(str);
 			tmp_sub[s_ind] = '\0', s_arr[count++] = tmp_sub;
 			resize_s_arr(&s_arr, count), sub_str += s_ind;

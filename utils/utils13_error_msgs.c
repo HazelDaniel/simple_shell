@@ -65,7 +65,7 @@ char *error_2_exit(char **args)
  */
 char *error_2_cd(char **args)
 {
-	char *error = NULL, *hist_str, *tmp, er_buff[1024] = "";
+	char *error = NULL, *hist_str, *tmp;
 
 	hist_str = _itoa(hist);
 	if (!hist_str)

@@ -108,7 +108,7 @@ char *_strncat(char *dest, char *src, int n)
 **/
 char *_strdcat(char *dest, char *src)
 {
-	int dest_count = 0, src_count = 0, ind = 0;
+	int  ind = 0;
 	unsigned int res_len = 0, i, dest_len, src_len;
 	char *res = NULL;
 
@@ -122,9 +122,9 @@ char *_strdcat(char *dest, char *src)
 		return (NULL);
 	res[res_len] = '\0';
 
-	for (ind = 0; ind < dest_len; ind++)
+	for (ind = 0; ind < (int)dest_len; ind++)
 		res[ind] = dest[ind];
-	for (i = 0; ind < res_len; ind++)
+	for (i = 0; ind < (int)res_len; ind++)
 		res[ind] = src[i++];
 
 	return (res);

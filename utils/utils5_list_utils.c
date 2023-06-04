@@ -144,7 +144,7 @@ void print_comms(const comm_list_t list)
  */
 void print_comms_full(void)
 {
-	int i = 0, j = 0;
+	int i = 0;
 	comm_list_t current = NULL;
 
 	if (!commands)

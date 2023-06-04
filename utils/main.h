@@ -178,7 +178,7 @@ void _freenv();
 char *_trace(char *input);
 
 /* INPUT HANDLERS */
-ssize_t _getline(char **line_addr, size_t *n, FILE *stream);
+ssize_t _getline(char **line_addr, FILE *stream);
 
 /* ALIAS HANDLERS */
 char *_getalias(char *input);

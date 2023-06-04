@@ -10,13 +10,11 @@
 char *_trace(char *input)
 {
 	pathdir_t *current = path_list;
-	char *buff = NULL, *res = NULL, *slash = NULL, *tmp, *path;
-	int dir_len, input_len;
+	char *buff = NULL, *slash = NULL;
 
 	slash = "/";
 	while (current)
 	{
-		dir_len = _strlen(current->dir), input_len = _strlen(input);
 		buff = _strvcat(current->dir, slash, input, NULL);
 		if (buff && access(buff, F_OK) == 0)
 			return (buff);

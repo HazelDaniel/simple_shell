@@ -101,11 +101,10 @@ void remove_trash(char *value)
  */
 trashenv_t *get_trash(trashenv_t *list, char *value)
 {
-	trashenv_t *current = list, *prev = NULL;
+	trashenv_t *current = list;
 
 	while (current && (_strcmp(current->value, value)))
 	{
-		prev = current;
 		current = current->next;
 	}
 

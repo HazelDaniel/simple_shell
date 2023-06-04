@@ -30,7 +30,7 @@ void exec_on_exit(void)
 	_memset(buff, 0, BUFF_LEN);
 	while ((read_n = read(fd, buff, BUFF_LEN)) > 0)
 	{
-		if (count >= _strlen(buff) - 1)
+		if (count >= (int)_strlen(buff) - 1)
 		{
 			buff = _realloc(buff, _strlen(buff) + 1, _strlen(buff) + 121);
 			if (!buff)

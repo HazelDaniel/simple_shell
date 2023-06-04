@@ -50,6 +50,11 @@ char *_getvar(char *input)
 		return (NULL);
 	while (current)
 	{
+		if (_strlen(input) == 1)
+		{
+			empty_state_buff("=");
+			return (_strddup(input));
+		}
 		if (is_start_str(input + 1, current->value))
 		{
 			cp_buffer = _strddup(current->value);

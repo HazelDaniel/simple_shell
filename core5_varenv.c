@@ -152,7 +152,7 @@ static int compare_and_sub(var_t **current_ptr, var_t **new_ptr,
 	* the shell variables
   * Return: void
  */
-void free_vars()
+void free_vars(void)
 {
 	var_t **current = &variables, *next = NULL;
 

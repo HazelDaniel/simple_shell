@@ -19,7 +19,7 @@ void _free(void **ptr)
 /**
  * _strvcat - a function that concatenates
  * a variable number of strings
- * @first_str, the first string in the parameter
+ * @first_str: the first string in the parameter
  * list
  * Return: char *
  **/

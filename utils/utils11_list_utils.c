@@ -90,11 +90,10 @@ void free_path(void)
 
 /**
   * print_trash - prints the environment trash
-	* @list:  a parameter of type trashenv_t *
   * Return: void
 	* Description: checked
  */
-void print_trash()
+void print_trash(void)
 {
 	trashenv_t *current = env_trash;
 

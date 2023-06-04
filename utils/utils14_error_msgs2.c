@@ -15,7 +15,8 @@ char *error_126(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	error = _strvcat(name, ": ", hist_str, ": ", args[0], ": Permission denied\n", NULL);
+	error = _strvcat(name, ": ", hist_str, ": ",
+		args[0], ": Permission denied\n", NULL);
 
 	_free_(hist_str);
 	return (error);

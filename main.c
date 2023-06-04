@@ -8,8 +8,9 @@ trashenv_t *env_trash = NULL;
 pathdir_t *path_list = NULL;
 alias_t *aliases = NULL;
 var_t *variables = NULL;
-char *prompts[10] =
-{"_$ ", " ___($USER@$hostname)-[$PWD]\n|___: ", "$"}, *prompt;
+char *prompts[10] = {
+	"_$ ", " ___($USER@$hostname)-[$PWD]\n|___: ", "$"
+}, *prompt;
 
 /**
  * handle_signal - the signal handler for CTRL-C

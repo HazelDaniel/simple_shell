@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* is_dot - a function that checks if
+* is_log - a function that checks if
 * a character is a logical operator
 * @c: parameter of type char .
 * Return: int .

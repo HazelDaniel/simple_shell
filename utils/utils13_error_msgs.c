@@ -32,7 +32,7 @@ char *error_1(char **args)
 {
 	char *error;
 
-	error = _strvcat("alias:", args[0]," not found\n", NULL);
+	error = _strvcat("alias:", args[0], " not found\n", NULL);
 
 	return (error);
 }
@@ -51,7 +51,8 @@ char *error_2_exit(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	error = _strvcat(name, ": ", hist_str, " exit: Illegal number: ", args[0], "\n", NULL);
+	error = _strvcat(name, ": ", hist_str,
+		" exit: Illegal number: ", args[0], "\n", NULL);
 
 	_free_(hist_str);
 	return (error);
@@ -102,7 +103,8 @@ char *error_2_syntax(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	error = _strvcat(name, ": ", hist_str, ": Syntax error: \"", args[0], "\" unexpected\n", NULL);
+	error = _strvcat(name, ": ", hist_str, ": Syntax error: \"",
+		args[0], "\" unexpected\n", NULL);
 
 	_free_(hist_str);
 

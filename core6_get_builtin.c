@@ -11,7 +11,7 @@ int handle_st_hyp(char **old_cptr, char **curr_cptr,
   * get_builtin - a function that selects
 	* a function to handle a matched command
   * @command: the command passed
-  * @list: parameter of type char ** - the argv
+  * -list: parameter of type char ** - the argv
 	* implementation.
   * Return: int .
  */

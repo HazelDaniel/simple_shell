@@ -2,7 +2,7 @@
 
 /**
  * execute - a function that executes a command
- * @command: the command to execute
+ * @comm_str: the command string to execute
  * Return: int
  **/
 int execute(char *comm_str)

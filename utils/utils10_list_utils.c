@@ -36,11 +36,10 @@ void append_trash(char *value, int index)
 
 /**
   * clear_trash - clears the environment trash
-	* @list: parameter of type trashenv_t *
   * Return: void .
 	* Description: checked
  */
-void clear_trash()
+void clear_trash(void)
 {
 	trashenv_t *current = env_trash, *next = NULL;
 
@@ -66,7 +65,6 @@ void clear_trash()
 /**
   * remove_trash - removes an entry from the environment trash
   * @value: parameter of type char *.
-  * @list: parameter of type trashenv_t *
 	* Description: checked
   * Return: void .
  */

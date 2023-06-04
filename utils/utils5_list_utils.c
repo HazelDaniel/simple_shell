@@ -17,7 +17,8 @@ void append_comm(comm_list_t *list, char separator,
 
 	if (!new_comm)
 		return;
-	new_comm->separator = malloc(2 * sizeof(char)), _memcpy(&separator, new_comm->separator, 1);
+	new_comm->separator = malloc(2 * sizeof(char));
+	_memcpy(&separator, new_comm->separator, 1);
 	new_comm->command = _strddup((char *)command);
 	new_comm->status = (int *)malloc(sizeof(int));
 	new_comm->id = id++;

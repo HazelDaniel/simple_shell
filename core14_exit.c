@@ -68,7 +68,8 @@ void set_exec_dir(char *argv[])
 	if (_len_p((void *)argv) == 2)
 	{
 		callpwd = _getenv("PWD");
-		callpwd = _realloc(callpwd, _strlen(callpwd) + 1, _strlen(callpwd) + _strlen(argv[1]) + 2);
+		callpwd = _realloc(callpwd, _strlen(callpwd) + 1,
+			_strlen(callpwd) + _strlen(argv[1]) + 2);
 		_memcpy("/", callpwd + _strlen(callpwd), 1);
 		_memcpy(argv[1], callpwd + _strlen(callpwd), _strlen(argv[1]));
 	}

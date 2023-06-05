@@ -103,6 +103,7 @@ int _setvar(char *input)
 		if (compare_and_sub(&current, &new_var, &input, &cpy, &key))
 			return (1);
 		current->next = new_var;
+		_free_(cpy), _free_(key);
 		return (1);
 	}
 	while (current && current->next)

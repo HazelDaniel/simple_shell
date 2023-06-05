@@ -60,8 +60,10 @@ int eval_comms(const comm_list_t list)
 	{
 		if (current->is_linked)
 		{
+			puts("linked");
 			cmd_list = _trim(current->command);
 			list_comms = _log_split(cmd_list, "&");
+			_free_(cmd_list);
 			if (!list_comms)
 				return (-1);
 			link_head = NULL;

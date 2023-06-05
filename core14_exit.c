@@ -8,10 +8,13 @@ void exec_on_exit(void)
 {
 	int access_n, read_n, count = 0, i;
 	ssize_t fd;
-	char *buff = NULL, *fd_str, **exec_list;
+	char *buff = NULL, *fd_str = NULL, **exec_list;
 
 	if (!callpwd)
+	{
+		_free_(callpwd), _free_(fd_str), cleanup();
 		return;
+	}
 	access_n = access(callpwd, F_OK);
 	if (access_n != 0)
 	{
@@ -50,7 +53,10 @@ void exec_on_exit(void)
 
 	fd_str = _itoa(fd);
 	if (close(fd) != -1)
+	{
+		_free_(fd_str);
 		return;
+	}
 	write(STDERR_FILENO, "Error: Can't close fd ", 22);
 	write(STDERR_FILENO, fd_str, _strlen(fd_str));
 	write(STDERR_FILENO, "\n", 1);

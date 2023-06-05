@@ -11,17 +11,18 @@ int execute(char *comm_str)
 	int (*f)(char **list), ret_num = 0, status;
 	pid_t child_pid;
 
-	args = _splitstr(command, "\n\r\a\t ");
-	format_args(args);
+	args = _splitstr(command, "\n\r\a\t "), format_args(args);
 	if (args && args[0])
 	{
-		_free_(command), command = args[0];
-		f = get_builtin(command);
+		_free_(command), command = args[0], f = get_builtin(command);
 		if (f)
 		{
 			ret_num = f(args + 1);
 			if (create_ex_stat(ret_num))
+			{
+				free_str_arr(args, 1);
 				return (1);
+			}
 		}
 		else
 		{
@@ -45,8 +46,7 @@ int execute(char *comm_str)
 				child_pid = fork();
 				if (child_pid == -1)
 				{
-					free_str_arr(args, 1);
-					perror("Error forking child:");
+					free_str_arr(args, 1), perror("Error forking child:");
 					return (1);
 				}
 				if (child_pid == 0)
@@ -55,23 +55,30 @@ int execute(char *comm_str)
 					if (errno == EACCES)
 						ret_num = (create_error(args, 126));
 					if (create_ex_stat(ret_num))
+					{
+						free_str_arr(args, 1);
 						return (1);
-					cleanup(), _exit(ret_num);
+					}
+					free_str_arr(args, 1), cleanup(), _exit(ret_num);
 				}
 				else
 				{
-					wait(&status);
-					ret_num = WEXITSTATUS(status);
+					wait(&status), ret_num = WEXITSTATUS(status);
 					if (create_ex_stat(status))
+					{
+						free_str_arr(args, 1);
 						return (1);
+					}
 				}
 				if (create_ex_stat(0))
+				{
+					free_str_arr(args, 1);
 					return (1);
+				}
 			}
 		}
 	}
 	free_str_arr(args, 1);
-
 	if (create_ex_stat(ret_num))
 		return (1);
 	return (ret_num);

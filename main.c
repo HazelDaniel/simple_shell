@@ -32,7 +32,7 @@ void handle_signal(int sig)
 }
 
 /**
- * initialize - a function that initializes
+ * init - a function that initializes
  * the necessary resources needed to run all
  * processes.
  * @argv: parameter of type char *[]
